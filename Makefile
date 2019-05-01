@@ -20,6 +20,6 @@ Ou.o: Ou.cpp Ou.h
 	g++ -o Ou.o -c ${CXXFLAGS} Ou.cpp
 
 clean:
-	rm main.o Valeur.o Noeud.o Variable.o main
+	rm main.o Valeur.o Noeud.o Variable.o Ou.o main
 leak:
 	valgrind --leak-check=full ./main
