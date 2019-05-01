@@ -4,8 +4,9 @@
 class Valeur : public Noeud{
 
 public:
-Valeur(bool);
+Valeur(bool); 
 
+bool Calcule(bool*) const override;
 //Atributs
 protected:
 bool val_;
