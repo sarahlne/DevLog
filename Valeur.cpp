@@ -3,6 +3,6 @@
 Valeur::Valeur(bool b):val_(b){
 }
 
-bool Valeur::Calcule(bool*) const{
+bool Valeur::Calcule(bool* b) const{
 return val_;
 }

@@ -6,6 +6,7 @@ class Variable : public Noeud{
 public:
 Variable(unsigned); 
 
+bool Calcule(bool*) const override;
 //Atributs
 protected:
 bool posit_;

@@ -1,5 +1,8 @@
 #include"Variable.h"
 
-Valeur::Valeur(unsigned u):posit_(u){
+Variable::Variable(unsigned u):posit_(u){
 }
 
+bool Variable::Calcule(bool* b) const{
+return b[posit_];
+}
