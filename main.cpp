@@ -3,6 +3,7 @@
 #include"Valeur.h"
 #include"Variable.h"
 #include"Ou.h"
+#include"Et.h"
 int main(){
 std::cout << "Bonjour monde" << std::endl;
 
@@ -20,8 +21,16 @@ Ou O2(&Nt, &V1);
 Ou O3(&V1, &V2);
 Ou O4(&V2, &Nf);
 
+// test constructeur Et
+
+Et E1(&Nf, &Nt);
+Et E2(&Nt, &V1);
+Et E3(&V1, &V2);
+Et E4(&V2, &Nf);
+
+
 //test Calcule
-Noeud* tabN[8];
+Noeud* tabN[12];
 tabN[0]=&Nf;
 tabN[1]=&Nt;
 tabN[2]=&V1;
@@ -30,6 +39,10 @@ tabN[4]=&O1;
 tabN[5]=&O2;
 tabN[6]=&O3;
 tabN[7]=&O4;
+tabN[8]=&E1;
+tabN[9]=&E2;
+tabN[10]=&E3;
+tabN[11]=&E4;
 bool X[2];
 X[0]=true;
 X[1]=false;
@@ -41,5 +54,9 @@ std::cout << (tabN[4]->Calcule(X)==true)<< std::endl;
 std::cout << (tabN[5]->Calcule(X)==true)<< std::endl;
 std::cout << (tabN[6]->Calcule(X)==true)<< std::endl;
 std::cout << (tabN[7]->Calcule(X)==false)<< std::endl;
+std::cout << (tabN[8]->Calcule(X)==false)<< std::endl;
+std::cout << (tabN[9]->Calcule(X)==true)<< std::endl;
+std::cout << (tabN[10]->Calcule(X)==false)<< std::endl;
+std::cout << (tabN[11]->Calcule(X)==false)<< std::endl;
 return 0;
 }

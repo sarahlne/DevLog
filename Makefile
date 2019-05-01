@@ -1,8 +1,8 @@
 CXXFLAGS= -Wall -O0 -g
 
 
-main: main.o Noeud.o Valeur.o Variable.o Ou.o
-	g++ -o main main.o Noeud.o Valeur.o Variable.o Ou.o
+main: main.o Noeud.o Valeur.o Variable.o Ou.o Et.o
+	g++ -o main main.o Noeud.o Valeur.o Variable.o Ou.o Et.o
 
 main.o: main.cpp
 	g++ -o main.o -c ${CXXFLAGS} main.cpp
@@ -19,7 +19,9 @@ Variable.o: Variable.cpp Variable.h
 Ou.o: Ou.cpp Ou.h
 	g++ -o Ou.o -c ${CXXFLAGS} Ou.cpp
 
+Et.o: Et.cpp Et.h
+	g++ -o Et.o -c ${CXXFLAGS} Et.cpp
 clean:
-	rm main.o Valeur.o Noeud.o Variable.o Ou.o main
+	rm main.o Valeur.o Noeud.o Variable.o Ou.o Et.o main 
 leak:
 	valgrind --leak-check=full ./main
