@@ -87,5 +87,12 @@ std::cout << (tabN[11]->Affiche())<< std::endl;
 
 std::cout << (tabN[12]->Affiche())<< std::endl;
 std::cout << (tabN[13]->Affiche())<< std::endl;
+
+Ou Osup(&O2,&E1);
+Non Nsup(&E3);
+Et Esup(&Osup, &Nsup);
+
+std::cout << (Esup.Affiche())<< std::endl;
+std::cout << (Esup.Calcule(X))<< std::endl;
 return 0;
 }
