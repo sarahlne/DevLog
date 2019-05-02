@@ -66,6 +66,5 @@ std::cout << (tabN[9]->Calcule(X)==true)<< std::endl;
 std::cout << (tabN[10]->Calcule(X)==false)<< std::endl;
 std::cout << (tabN[11]->Calcule(X)==false)<< std::endl;
 std::cout << (tabN[12]->Calcule(X)==false)<< std::endl;
-std::cout << (tabN[13]->Calcule(X)==true)<< std::endl;
-return 0;
+git guireturn 0;
 }
