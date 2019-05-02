@@ -5,3 +5,11 @@ Et::Et(Noeud* N1,Noeud* N2):Noeud1_(N1),Noeud2_(N2){
 bool Et::Calcule(bool* b) const{
 return Noeud1_->Calcule(b) and Noeud2_->Calcule(b);
 }
+
+std::string Et::Affiche() const{
+
+std::string ou(" And ");
+return  Noeud1_->Affiche() +ou+ Noeud2_->Affiche();
+
+
+}
