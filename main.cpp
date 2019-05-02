@@ -71,7 +71,6 @@ std::cout << (tabN[13]->Calcule(X)==true)<< std::endl;
 // test affichage
 std::cout << (tabN[0]->Affiche())<< std::endl;
 std::cout << (tabN[1]->Affiche())<< std::endl;
-
 std::cout << (tabN[2]->Affiche())<< std::endl;
 std::cout << (tabN[3]->Affiche())<< std::endl;
 
