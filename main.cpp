@@ -4,6 +4,7 @@
 #include"Variable.h"
 #include"Ou.h"
 #include"Et.h"
+#include"Non.h"
 int main(){
 std::cout << "Bonjour monde" << std::endl;
 
@@ -28,9 +29,13 @@ Et E2(&Nt, &V1);
 Et E3(&V1, &V2);
 Et E4(&V2, &Nf);
 
+// test constructeur Non
+
+Non N1(&Nt);
+Non N2(&Nf);
 
 //test Calcule
-Noeud* tabN[12];
+Noeud* tabN[14];
 tabN[0]=&Nf;
 tabN[1]=&Nt;
 tabN[2]=&V1;
@@ -43,6 +48,8 @@ tabN[8]=&E1;
 tabN[9]=&E2;
 tabN[10]=&E3;
 tabN[11]=&E4;
+tabN[12]=&N1;
+tabN[13]=&N2;
 bool X[2];
 X[0]=true;
 X[1]=false;
@@ -58,5 +65,7 @@ std::cout << (tabN[8]->Calcule(X)==false)<< std::endl;
 std::cout << (tabN[9]->Calcule(X)==true)<< std::endl;
 std::cout << (tabN[10]->Calcule(X)==false)<< std::endl;
 std::cout << (tabN[11]->Calcule(X)==false)<< std::endl;
+std::cout << (tabN[12]->Calcule(X)==false)<< std::endl;
+std::cout << (tabN[13]->Calcule(X)==true)<< std::endl;
 return 0;
 }
