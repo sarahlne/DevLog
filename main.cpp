@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include"Noeud.h"
 #include"Valeur.h"
 #include"Variable.h"
@@ -67,5 +68,10 @@ std::cout << (tabN[10]->Calcule(X)==false)<< std::endl;
 std::cout << (tabN[11]->Calcule(X)==false)<< std::endl;
 std::cout << (tabN[12]->Calcule(X)==false)<< std::endl;
 std::cout << (tabN[13]->Calcule(X)==true)<< std::endl;
+// test affichage
+std::cout << (tabN[0]->Affiche())<< std::endl;
+std::cout << (tabN[1]->Affiche())<< std::endl;
+std::cout << (tabN[2]->Affiche())<< std::endl;
+std::cout << (tabN[3]->Affiche())<< std::endl;
 return 0;
 }
