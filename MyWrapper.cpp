@@ -1,90 +1,70 @@
 #include <Python.h>//include the "Python.h" header before any other include
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
-#include <math.h>
+//#include <string>
+//#include <math.h>
 #include <zlib.h>
 #include <errno.h>
 #include "def_PyC.h"
-#include "A.h"
-#include "B.h"
+#include "Solve.h"
 
 // Name for the cpp object "capsules"
-#define NAME_CAPSULE_A "A"
-#define NAME_CAPSULE_B "B"
+#define NAME_CAPSULE_SOLVE "SOLVE"
+
 
 // Receives a Python capsule for object A, and extracts the pointer of the C++ object
-static A* APythonToC(PyObject* args){
-	A* my_A;
+//Pyobjet : onejt du Python.h
+static Solve* SolvePythonToC(PyObject* args){
+	Solve* my_Solve;
 	PyObject* capsule;
 	if (!PyArg_ParseTuple(args, "O", &capsule)){
 		return NULL;
 	}
-	my_A = (A*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_A);
-	return my_A;
+	my_Solve = (Solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_Solve);
+	return my_Solve;
 }
-
-// Receives a Python capsule for object B, and extracts the pointer of the C++ object
-static B* BPythonToC(PyObject* args){
-	B* my_B;
-	PyObject* capsule;
-	if (!PyArg_ParseTuple(args, "O", &capsule)){
-		return NULL;
-	}
-	my_B = (B*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_B);
-	return my_B;
-}
+//si on a un autre objet faire une autre methode objetPython to C , un autre destructuer, une autre fonction Print ...
 
 // Frees object A Python capsule
-void ACapsuleDestructor(PyObject* capsule){
-	A* my_A = (A*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_A);
-  delete my_A;
+void SolveCapsuleDestructor(PyObject* capsule){
+	Solve* my_solve = (solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_Solve);
+  delete my_Solve;
 }
 
-// Frees object B Python capsule
-void BCapsuleDestructor(PyObject* capsule){
-	B* my_B = (B*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_B);
-  delete my_B;
-}
 
 // Calls the Print function of object A
-static PyObject*  PrintA(PyObject* self, PyObject* args){
-    A*  my_A = APythonToC(args);
-    my_A->Print();
-    Py_INCREF(Py_None);
-    return Py_None;
+static PyObject*  PrintSolve(PyObject* self, PyObject* args){
+    Solve*  my_Solve = SolvePythonToC(args);
+    my_Solve->Print();
+    //renvoie un None de Python
+    //Incremente , a chaque fois qu'il est creer , on incremente
+    // 2 lignes pas forcement utile
+    //renvoie une nouvelle instance de None , donc il faut incrémenter
+    // mettre ces lignes si on fait des returns de None
+    //#Py_INCREF(Py_None);
+    //#return Py_None;
 }
 
-// Calls the Print function of object B
-static PyObject*  PrintB(PyObject* self, PyObject* args){
-    B*  my_B = BPythonToC(args);
-    my_B->Print();
-    Py_INCREF(Py_None);
-    return Py_None;
-}
 
-// Receive and parse parameters, constructs an object A, encapsulate it and return the capsule
-static PyObject* ATranslator(PyObject* self, PyObject* args){
-	int a;
-	if (!PyArg_ParseTuple(args, "h", &a)){
+// Receive and parse parameters, constructs an object Solve, encapsulate it and return the capsule
+//self : librairie  , args : objet python , les arguments donnés
+static PyObject* SolveTranslator(PyObject* self, PyObject* args){
+	int sol;
+	if (!PyArg_ParseTuple(args, "h", &sol)){
+	//parse un tuple
+	//tuple des arguments , args 
+	//"h" : type des éléments de args , EX: si 2 int : "hh"  , si objet pyhton comme liste "O" , (args , "hO" , &a , &obj)
+	//&a l'element en c++ ou on va mettre le contenu (les args)
+	//le if teste les arguments rentrées , si il ne sont pas bons --> NULL , ne focntionne pas
 		return NULL;
 	}
-	A* my_A = new A(a);
-	PyObject* capsule = PyCapsule_New(my_A, NAME_CAPSULE_A, ACapsuleDestructor);
+	Solve* my_Solve = new Solve(sol);
+	//creer la capsule 
+	//Py capsule : du Python .h 
+	//arguments : l'objet- pointeur c++, nom Capsule ( du #define au début) , le destructeur pour vider la capsule
 	return capsule;
 }
 
-// Receive and parse parameters, constructs an object B, encapsulate it and return the capsule
-static PyObject* BTranslator(PyObject* self, PyObject* args){
-	int b;
-  // parse the argument tuple: https://docs.python.org/3/c-api/arg.html
-	if (!PyArg_ParseTuple(args, "h", &b)){
-		return NULL;
-	}
-	B* my_B = new B(b);
-	PyObject* capsule = PyCapsule_New(my_B, NAME_CAPSULE_B, BCapsuleDestructor);
-	return capsule;
-}
 
 static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
     PyListObject* listOfAs;
@@ -107,19 +87,23 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 // Module functions {<python function name>, <function in wrapper>, <parameters flag>, <doctring>}
 // https://docs.python.org/3/c-api/structures.html
 static PyMethodDef module_funcs[] = {
+//4 trucs pour chaque methode : le nom de la focntion Python, nom de la methode en c++, type d'arguments ( laisser le METH_varrags , prends des arguments , puis la docstring
+// (PycFunction) pour dire à Pyhton , que c'est une capsule , à voir si c'est utile
     {"generate_A", (PyCFunction)ATranslator, METH_VARARGS, "Create an instance of class A\n\nArgs:\n\ta (int): the parameter\n\nReturns:\n\t capsule: Object A capsule"},
 		{"generate_B", (PyCFunction)BTranslator, METH_VARARGS, "Create an instance of class B\n\nArgs:\n\tb (int): the parameter\n\nReturns:\n\t capsule: Object B capsule "},
     {"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},
     {"print_A", PrintA, METH_VARARGS,  "Print class A instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule"},
     {"print_B", PrintB, METH_VARARGS, "Print class B instance\n\n Args:\n\t capsuleA (Capsule) : object B capsule"},
-		{NULL, NULL, METH_NOARGS, NULL}
+		{NULL, NULL, METH_NOARGS, NULL} // no args : ne prends pas d'arguments
 };
 
 static struct PyModuleDef moduledef = {
         PyModuleDef_HEAD_INIT,
-        "my_wrapper_c",
-        "my_wrapper_c module is simple example of C++ extension for python",
+        "BinSymReg",
+        "BinSymReg is a library for Binary symbolic Regression",
+        //taille du module
         sizeof(PyObject*),
+        //toutes les focntions: 
 				module_funcs,
 				NULL,
         NULL,
