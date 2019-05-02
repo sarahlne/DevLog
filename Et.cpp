@@ -8,8 +8,7 @@ return Noeud1_->Calcule(b) and Noeud2_->Calcule(b);
 
 std::string Et::Affiche() const{
 
-std::string ou(" And ");
-return  Noeud1_->Affiche() +ou+ Noeud2_->Affiche();
+return  "("+Noeud1_->Affiche() +" And "+ Noeud2_->Affiche()+")";
 
 
 }

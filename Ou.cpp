@@ -8,8 +8,7 @@ return Noeud1_->Calcule(b) or Noeud2_->Calcule(b);
 
 std::string Ou::Affiche() const{
 
-std::string ou(" Or ");
-return  Noeud1_->Affiche() +ou+ Noeud2_->Affiche();
+return  "("+Noeud1_->Affiche() +" Or "+ Noeud2_->Affiche()+")";
 
 
 }

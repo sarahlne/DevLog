@@ -9,9 +9,8 @@ return b[posit_];
 
 std::string Variable::Affiche() const{
 
-std::string r("X");
-std::string l= std::to_string(posit_);
-return  r+l;
+std::string s= std::to_string(posit_);
+return  "X"+s;
 
 
 }
