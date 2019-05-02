@@ -74,5 +74,10 @@ std::cout << (tabN[1]->Affiche())<< std::endl;
 
 std::cout << (tabN[2]->Affiche())<< std::endl;
 std::cout << (tabN[3]->Affiche())<< std::endl;
+
+std::cout << (tabN[4]->Affiche())<< std::endl;
+std::cout << (tabN[5]->Affiche())<< std::endl;
+std::cout << (tabN[6]->Affiche())<< std::endl;
+std::cout << (tabN[7]->Affiche())<< std::endl;
 return 0;
 }
