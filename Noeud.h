@@ -7,6 +7,6 @@ class Noeud{
 public:
 virtual bool Calcule(bool*) const=0;
 
-virtual std::string Affiche(bool*) const;
+virtual std::string Affiche() const;
 };
 #endif //NODE_

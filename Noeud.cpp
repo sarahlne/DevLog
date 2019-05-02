@@ -1,6 +1,6 @@
 #include"Noeud.h"
 
-std::string Noeud::Affiche(bool*) const{
+std::string Noeud::Affiche() const{
 
 return std::string("True");
 }

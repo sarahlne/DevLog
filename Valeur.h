@@ -9,7 +9,7 @@ Valeur(bool);
 
 bool Calcule(bool*) const override;
 
-std::string Affiche(bool*) const override;
+std::string Affiche() const override;
 //Atributs
 protected:
 bool val_;
