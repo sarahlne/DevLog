@@ -21,7 +21,7 @@ Fonction::Fonction(Noeud* noeud){
 
 //Copy constructor//
 Fonction::Fonction(const Fonction& model){
-	AdressFirstNode_ = model.AdressFirstNode_;
+	AdressFirstNode_ = model.AdressFirstNode_->Copy();
 	Fitness_ = model.Fitness_;
 }
 
