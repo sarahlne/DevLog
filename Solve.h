@@ -1,6 +1,9 @@
 #include<iostream>
 #include "Fonction.h"
 #include "Noeud.h"
+#include "Valeur.h"
+#include <string>
+
 #ifndef SOLVE
 #define SOLVE
 class Solve{
@@ -14,15 +17,12 @@ class Solve{
         
     //Function
     void evolve();
-    
   
     //Getters
-    
-    
-    
-    
+    std::string affiche_final_fonction() const;
+   
   protected:
-    Fonction ** popFonct_   ; // tableau de fonction 
+    Fonction ** popFonct_   ; // pointeur d'un tableau de pointeurs
     //int  HistoricFitness_ [];
     int nbGeneration_;
     bool ** x_  ;
