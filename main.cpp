@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string>
+
 #include"Noeud.h"
 #include"Valeur.h"
 #include"Variable.h"
 #include"Ou.h"
 #include"Et.h"
 #include"Non.h"
+#include"Fonction.h"
+
 int main(){
 std::cout << "Bonjour monde" << std::endl;
 
@@ -105,7 +108,8 @@ Ecopy1->Unasigne();
 std::cout << (Ecopy2->Affiche())<< std::endl;
 std::cout << (Ecopy2->Calcule(X))<< std::endl;
 
-Ecopy2->Unasigne();
-delete Esup;
+Fonction F1(Ecopy2);
+std::cout << (F1.Affiche()) << std::endl;
+
 return 0;
 }
