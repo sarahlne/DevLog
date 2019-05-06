@@ -25,14 +25,10 @@ class Fonction{
 	/* AdressFirstNode getter */
 	Noeud* get_Adress();
 	
-	/* Fitness getter */
-	float get_Fitness();
-	
 	protected:
 	
 	private:
 	Noeud* AdressFirstNode_;
-	float Fitness_;
 	
 };
 #endif //CHARACTER_
