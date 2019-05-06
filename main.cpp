@@ -108,8 +108,25 @@ Ecopy1->Unasigne();
 std::cout << (Ecopy2->Affiche())<< std::endl;
 std::cout << (Ecopy2->Calcule(X))<< std::endl;
 
+// Test of declaration of a Fonction //
 Fonction F1(Ecopy2);
 std::cout << (F1.Affiche()) << std::endl;
 
+// Test of Calcul method of Fonction //
+
+bool** input;
+bool* result;
+result[0] = 1;
+result[1] = 1;
+result[2] = 1;
+input[0][0] = 0;
+input[2][0] = 0;
+input[0][1]=0;
+input[1][0]= 1;
+input[1][1]= 1;
+input[2][1] = 1;
+
+float result_Fitness = F1.CalculeFitness(input, 3, result);
+std::cout << result_Fitness << std::endl;
 return 0;
 }
