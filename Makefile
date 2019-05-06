@@ -1,14 +1,17 @@
 CXXFLAGS= -Wall -O0 -g
 
 
-main: main.o Noeud.o Valeur.o Variable.o Ou.o Et.o Non.o Fonction.o
-	g++ -o main main.o Noeud.o Valeur.o Variable.o Ou.o Et.o Non.o
+main: main.o Noeud.o Fonction.o Valeur.o Variable.o Ou.o Et.o Non.o 
+	g++ -o main main.o Fonction.o Noeud.o Valeur.o Variable.o Ou.o Et.o Non.o
 
 main.o: main.cpp
 	g++ -o main.o -c ${CXXFLAGS} main.cpp
 
 Noeud.o: Noeud.cpp Noeud.h
 	g++ -o Noeud.o -c ${CXXFLAGS} Noeud.cpp
+
+Fonction.o: Fonction.cpp Fonction.h
+	g++  -o Fonction.o -c ${CXXFLAGS} Fonction.cpp
 
 Valeur.o: Valeur.cpp Valeur.h
 	g++ -o Valeur.o -c ${CXXFLAGS} Valeur.cpp
@@ -25,9 +28,7 @@ Et.o: Et.cpp Et.h
 Non.o: Non.cpp Non.h
 	g++ -o Non.o -c ${CXXFLAGS} Non.cpp
 	
-Fonction.o: Fonction.cpp Fonction.h
-	g++  -o Fonction.o -c ${CXXFLAGS} Fonction.cpp
-	
+
 clean:
 	rm main.o Valeur.o Noeud.o Variable.o Ou.o Et.o Non.o main Fonction.o
 leak:

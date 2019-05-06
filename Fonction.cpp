@@ -1,28 +1,20 @@
 #include <iostream>
-#include "Fonction.h"
+#include <string>
 
-#include "Noeud.h"
-#include "Valeur.h"
-#include "Variable.h"
-#include "Ou.h"
-#include "Et.h"
-#include "Non.h"
+#include "Fonction.h"
 
 using std::cout;
 using std::cin;
 using std::endl;
 
-
 //Constructor//
 Fonction::Fonction(Noeud* noeud){
 	AdressFirstNode_ = noeud;
-	Fitness_ = 0.0;
 }
 
 //Copy constructor//
 Fonction::Fonction(const Fonction& model){
 	AdressFirstNode_ = model.AdressFirstNode_;
-	Fitness_ = model.Fitness_;
 }
 
 //Destructor//
@@ -35,9 +27,14 @@ Noeud* Fonction::get_Adress(){
 	return AdressFirstNode_;
 }
 
-//Fitness getter//
- float Fonction::get_Fitness(){
- 	return Fitness_;
- }
+// Calcul() method //
+bool Fonction::Calcule(bool input[]){
+	return AdressFirstNode_->Calcule(input);
+}
+
+// Affiche() method //
+std::string Fonction::Affiche(){
+	return AdressFirstNode_->Affiche();
+}
 
 
