@@ -8,25 +8,31 @@
 Solve::Solve(){
   lambda_=5;
   nbvar_=3;
-  popFonct_= new Fonction[lambda_];
-  noeud1=new Valeur(True);
-  popFonct_[0]=new Fonction(noeud1);
+  popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
+  Valeur noeud1=new Valeur(true);
+  popFonct_[0]=new Fonction(&noeud1);
 }
 
 Solve::Solve(int dim , int nbfille){
   lambda_=nbfille;
   nbvar_=dim;
-  popFonct_= new Fonction[lambda_];
-  noeud1=new Valeur(True);
-  popFonct_[0]=new Fonction(noeud1);
+  popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
+  Valeur noeud1=new Valeur(true);
+  popFonct_[0]=new Fonction(&noeud1);
 }
 //destructeur
-Solve:~Solve(){
-  delete [] popFonct ;
+Solve::~Solve(){
+  for(int i; i<lambda_; i++){ //delete chaque pointeur de tableau
+    delete popFonct_[i];
+  } 
+  free(popFonct_) ;
   
 }
 
 //##################FUNCTIONS##################
+
+
+
 
 void Solve::evolve(){
 
