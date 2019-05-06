@@ -1,11 +1,10 @@
 #ifndef FONCTION_
 #define FONCTION_ 
+#include <iostream>
+#include <string>
+
 #include "Noeud.h"
-#include "Valeur.h"
-#include "Variable.h"
-#include "Ou.h"
-#include "Et.h"
-#include "Non.h"
+
 
 class Fonction{
 	public:
@@ -25,15 +24,16 @@ class Fonction{
 	/* AdressFirstNode getter */
 	Noeud* get_Adress();
 	
-	/* Fitness getter */
-	float get_Fitness();
+	/* Calcul methode */
+	bool Calcule(bool input[]);
+	
+	/* Affiche method() */
+	std::string Affiche();
 	
 	protected:
 	
 	private:
 	Noeud* AdressFirstNode_;
-	float Fitness_;
-
 	
 };
 #endif //CHARACTER_
