@@ -1,12 +1,10 @@
 #ifndef FONCTION_
 #define FONCTION_ 
 #include <iostream>
+#include <string>
+
 #include "Noeud.h"
-#include "Valeur.h"
-#include "Variable.h"
-#include "Ou.h"
-#include "Et.h"
-#include "Non.h"
+
 
 class Fonction{
 	public:
@@ -27,8 +25,10 @@ class Fonction{
 	Noeud* get_Adress();
 	
 	/* Calcul methode */
-	bool Calcul(bool input[]);
+	bool Calcule(bool input[]);
 	
+	/* Affiche method() */
+	std::string Affiche();
 	
 	protected:
 	

@@ -1,12 +1,7 @@
 #include <iostream>
-#include "Fonction.h"
+#include <string>
 
-#include "Noeud.h"
-#include "Valeur.h"
-#include "Variable.h"
-#include "Ou.h"
-#include "Et.h"
-#include "Non.h"
+#include "Fonction.h"
 
 using std::cout;
 using std::cin;
@@ -31,9 +26,14 @@ Noeud* Fonction::get_Adress(){
 	return AdressFirstNode_;
 }
 
-// Calcul Methode //
-bool Fonction::Calcul(bool input[]){
-	return 1;
-};
+// Calcul() methode //
+bool Fonction::Calcule(bool input[]){
+	return AdressFirstNode_->Calcule(input);
+}
+
+// Affiche() method //
+std::string Fonction::Affiche(){
+	return AdressFirstNode_->Affiche();
+}
 
 
