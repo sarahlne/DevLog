@@ -13,3 +13,6 @@ Solve::Solve(){
 
 //##################FUNCTIONS##################
 
+void Solve::evoluer(){
+
+}

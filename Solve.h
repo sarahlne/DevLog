@@ -10,7 +10,7 @@ class Solve{
     
         
     //Function
-    virtual void Accelerate();
+    virtual void evoluer();
     
   
     //Getters
@@ -20,8 +20,8 @@ class Solve{
     
   protected:
   
-    Fonction [] pop; // tableau de fonction 
-    int nbgeneration;
+    Fonction [] popFonction; // tableau de fonction 
+    int [] HistoricFitness;
     
 };
 
