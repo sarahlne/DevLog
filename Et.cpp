@@ -27,7 +27,7 @@ return new Et(Noeud1_->Copy(),Noeud2_->Copy());
 
 void Et::GetNods(Noeud** tab,int* posit) {
   tab[*posit]=this;
-  posit ++;
+  *posit = *posit+1;
   Noeud1_->GetNods(tab,posit);
   Noeud2_->GetNods(tab,posit);
 }

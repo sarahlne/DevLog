@@ -23,10 +23,11 @@ Fonction::Fonction(const Fonction& model){
   len_= model.len_;
   maxlen_=100;
   int posit=0;
+  Nodes_=new Noeud*[100];
   AdressFirstNode_->GetNods(Nodes_,&posit);
 }
 
-//Destructor//
+//Destructor// 
 Fonction::~Fonction(){
   AdressFirstNode_->Unasigne();
 }
