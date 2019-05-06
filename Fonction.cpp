@@ -27,6 +27,7 @@ Fonction::Fonction(const Fonction& model){
 
 //Destructor//
 Fonction::~Fonction(){
+  AdressFirstNode_->Unasigne();
 }
 
 //AdressFirstNode getter//
@@ -38,3 +39,5 @@ Noeud* Fonction::get_Adress(){
  float Fonction::get_Fitness(){
  	return Fitness_;
  }
+
+

@@ -5,7 +5,7 @@
 class Et : public Noeud{
 
 public:
-Et(Noeud*,Noeud*); 
+Et(Noeud*,Noeud*);
 
 bool Calcule(bool*) const override;
 
