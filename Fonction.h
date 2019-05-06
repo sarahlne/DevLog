@@ -1,5 +1,6 @@
 #ifndef FONCTION_
 #define FONCTION_ 
+#include <iostream>
 #include "Noeud.h"
 #include "Valeur.h"
 #include "Variable.h"
@@ -24,6 +25,10 @@ class Fonction{
 	
 	/* AdressFirstNode getter */
 	Noeud* get_Adress();
+	
+	/* Calcul methode */
+	bool Calcul(bool input[]);
+	
 	
 	protected:
 	

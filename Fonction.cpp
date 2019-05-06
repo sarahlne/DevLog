@@ -12,7 +12,6 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-
 //Constructor//
 Fonction::Fonction(Noeud* noeud){
 	AdressFirstNode_ = noeud;
@@ -31,4 +30,10 @@ Fonction::~Fonction(){
 Noeud* Fonction::get_Adress(){
 	return AdressFirstNode_;
 }
+
+// Calcul Methode //
+bool Fonction::Calcul(bool input[]){
+	return 1;
+};
+
 
