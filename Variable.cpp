@@ -14,3 +14,7 @@ return  "X"+s;
 
 
 }
+
+void Variable::Unasigne(){
+  delete this;
+}

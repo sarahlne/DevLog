@@ -10,6 +10,8 @@ Variable(unsigned);
 bool Calcule(bool*) const override;
 
 std::string Affiche() const override;
+
+void Unasigne()  override;
 //Atributs
 protected:
 bool posit_;

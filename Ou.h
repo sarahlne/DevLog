@@ -10,6 +10,8 @@ Ou(Noeud*,Noeud*);
 bool Calcule(bool*) const override;
 
 std::string Affiche() const override;
+
+void Unasigne() override;
 //Atributs
 protected:
 Noeud* Noeud1_;

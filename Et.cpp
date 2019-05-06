@@ -12,3 +12,10 @@ return  "("+Noeud1_->Affiche() +" And "+ Noeud2_->Affiche()+")";
 
 
 }
+
+void Et::Unasigne(){
+  Noeud1_->Unasigne();
+  Noeud2_->Unasigne();
+  delete this;
+  
+}

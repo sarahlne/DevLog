@@ -13,3 +13,8 @@ return  "Not ("+ Noeud1_->Affiche() +")";
 
 
 }
+
+void Non::Unasigne(){
+  Noeud1_->Unasigne();
+  delete this;
+}
