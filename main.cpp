@@ -8,6 +8,7 @@
 #include"Et.h"
 #include"Non.h"
 #include"Fonction.h"
+#include"Solve.h"
 
 int main(){
 std::cout << "Bonjour monde" << std::endl;
@@ -110,6 +111,8 @@ std::cout << (Ecopy2->Calcule(X))<< std::endl;
 
 Fonction F1(Ecopy2);
 std::cout << (F1.Affiche()) << std::endl;
+
+Solve s1(3,5);
 
 return 0;
 }
