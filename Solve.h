@@ -2,6 +2,8 @@
 #include "Fonction.h"
 #include "Noeud.h"
 #include "Valeur.h"
+#include <string>
+
 
 #ifndef SOLVE
 #define SOLVE
@@ -15,6 +17,7 @@ class Solve{
     ~Solve();
         
     //Function
+
     
     int bestFitness(int * HistoricFitness_);
     /*This fonction research the best Fitness among all fitness of the generation
@@ -51,14 +54,13 @@ class Solve{
     
     
     
+
   
     //Getters
-    
-    
-    
-    
+    std::string affiche_final_fonction() const;
+   
   protected:
-    Fonction ** popFonct_   ; // tableau de fonction 
+    Fonction ** popFonct_   ; // pointeur d'un tableau de pointeurs
     int * HistoricFitness_ ;
     int nbGeneration_;
     bool ** x_  ;

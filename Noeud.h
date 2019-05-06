@@ -14,6 +14,8 @@ virtual void Unasigne() =0;
 
 virtual Noeud* Copy() const =0;
 
+virtual void GetNods(Noeud**,int*)  =0;
+
 
 };
 #endif //NODE_

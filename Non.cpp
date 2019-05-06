@@ -23,3 +23,8 @@ Noeud* Non::Copy() const{
 return new Non(Noeud1_->Copy());
 
 }
+void Non::GetNods(Noeud** tab,int* posit) {
+  tab[*posit]=this;
+  *posit = *posit+1;
+  Noeud1_->GetNods(tab,posit);
+}

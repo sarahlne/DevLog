@@ -11,6 +11,7 @@ Solve::Solve(){
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
   popFonct_[0]=new Fonction(new Valeur(true));
   //HistoricFitness_[0]=new int(popFonct_[0.fitness()]);
+
 }
 
 Solve::Solve(int dim , int nbfille){
@@ -19,6 +20,7 @@ Solve::Solve(int dim , int nbfille){
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
   popFonct_[0]=new Fonction(new Valeur(true));
   //HistoricFitness_[0]=new int(popFonct_[0].fitness());
+
 }
 //destructeur
 Solve::~Solve(){
@@ -79,4 +81,9 @@ void Solve::evolve(int nbGeneration,Fonction ** popFonct_,int * HistoricFitness_
     PlacementFct(place);  
     
   }
+}
+
+
+std::string Solve::affiche_final_fonction()const{
+	return popFonct_[0]->Affiche();
 }

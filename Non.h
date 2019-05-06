@@ -14,6 +14,8 @@ std::string Affiche() const override;
 void Unasigne()  override;
 
 Noeud* Copy() const override;
+
+void GetNods(Noeud**,int*) override;
 //Atributs
 protected:
 Noeud* Noeud1_;

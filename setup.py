@@ -3,6 +3,7 @@ os.environ["CC"] = "c++"
 from distutils.core import setup, Extension
 #Binary Symbolic Regression
 module = Extension('BinSymReg', ["Solve.cpp","MyWrapper.cpp"],include_dirs=["src"],libraries=[])
+#importer la librairie 
 module.extra_compile_args = []#,'-pg']
 
 setup(name='BinSymReg',

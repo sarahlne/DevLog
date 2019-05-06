@@ -1,6 +1,6 @@
 import BinSymReg as bsr
 
 
-#test pyhton 
-#creer un solveur ,le faire fonctionner
-#l'afficher
+S1=bsr.create_solver(3,5)
+bsr.print_fonct(S1)
+

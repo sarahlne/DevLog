@@ -1,4 +1,4 @@
-#include <Python.h>//include the "Python.h" header before any other include
+#include <Python.h> //include the "Python.h" header before any other include
 #include <stdio.h>
 #include <stdlib.h>
 //#include <string>
@@ -20,22 +20,22 @@ static Solve* SolvePythonToC(PyObject* args){
 	if (!PyArg_ParseTuple(args, "O", &capsule)){
 		return NULL;
 	}
-	my_Solve = (Solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_Solve);
+	my_Solve = (Solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_SOLVE);
 	return my_Solve;
 }
 //si on a un autre objet faire une autre methode objetPython to C , un autre destructuer, une autre fonction Print ...
 
 // Frees object A Python capsule
 void SolveCapsuleDestructor(PyObject* capsule){
-	Solve* my_solve = (solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_Solve);
-  delete my_Solve;
+	Solve* my_solve = (Solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_SOLVE);
+  delete my_solve;
 }
 
 
 // Calls the Print function of object A
 static PyObject*  PrintSolve(PyObject* self, PyObject* args){
     Solve*  my_Solve = SolvePythonToC(args);
-    my_Solve->Print();
+    my_Solve->affiche_final_fonction();
     //renvoie un None de Python
     //Incremente , a chaque fois qu'il est creer , on incremente
     // 2 lignes pas forcement utile
@@ -49,8 +49,9 @@ static PyObject*  PrintSolve(PyObject* self, PyObject* args){
 // Receive and parse parameters, constructs an object Solve, encapsulate it and return the capsule
 //self : librairie  , args : objet python , les arguments donnés
 static PyObject* SolveTranslator(PyObject* self, PyObject* args){
-	int sol;
-	if (!PyArg_ParseTuple(args, "h", &sol)){
+	int lambda;
+	int dim;
+	if (!PyArg_ParseTuple(args, "hh", &lambda,&dim)){
 	//parse un tuple
 	//tuple des arguments , args 
 	//"h" : type des éléments de args , EX: si 2 int : "hh"  , si objet pyhton comme liste "O" , (args , "hO" , &a , &obj)
@@ -58,7 +59,8 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	//le if teste les arguments rentrées , si il ne sont pas bons --> NULL , ne focntionne pas
 		return NULL;
 	}
-	Solve* my_Solve = new Solve(sol);
+	Solve* my_Solve = new Solve(lambda,dim);
+	PyObject* capsule = PyCapsule_New(my_Solve, NAME_CAPSULE_SOLVE, SolveCapsuleDestructor);
 	//creer la capsule 
 	//Py capsule : du Python .h 
 	//arguments : l'objet- pointeur c++, nom Capsule ( du #define au début) , le destructeur pour vider la capsule
@@ -88,11 +90,11 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 // Module functions {<python function name>, <function in wrapper>, <parameters flag>, <doctring>}
 // https://docs.python.org/3/c-api/structures.html
 static PyMethodDef module_funcs[] = {
-//4 trucs pour chaque methode : le nom de la focntion Python, nom de la methode en c++, type d'arguments ( laisser le METH_varrags , prends des arguments , puis la docstring
+//4 trucs pour chaque methode : le nom de la fontion Python, nom de la methode en c++, type d'arguments ( laisser le METH_varrags , prends des arguments , puis la docstring
 // (PycFunction) pour dire à Pyhton , que c'est une capsule , à voir si c'est utile
     {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int dim the dimension of vectors that the Fonctions will take \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
     /*{"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},*/
-    {"print_A", PrintA, METH_VARARGS,  "Print class A instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule"},
+    {"print_fonct", PrintSolve, METH_VARARGS,  "Print class Solve instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule \n\n Print the final Function find by the solver"},
 		{NULL, NULL, METH_NOARGS, NULL} // no args : ne prends pas d'arguments
 };
 
