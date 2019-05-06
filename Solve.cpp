@@ -9,16 +9,14 @@ Solve::Solve(){
   lambda_=5;
   nbvar_=3;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
-  Valeur noeud1(true);
-  popFonct_[0]=new Fonction(&noeud1);
+  popFonct_[0]=new Fonction(new Valeur(true));
 }
 
 Solve::Solve(int dim , int nbfille){
   lambda_=nbfille;
   nbvar_=dim;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
-  Valeur noeud1(true);
-  popFonct_[0]=new Fonction(&noeud1);
+  popFonct_[0]=new Fonction(new Valeur(true));
 }
 //destructeur
 Solve::~Solve(){
@@ -39,6 +37,6 @@ void Solve::evolve(){
 }
 
 
-void Solve::affiche_final_fonction(){
-	popFonct_[0]->Affiche();
+std::string Solve::affiche_final_fonction()const{
+	return popFonct_[0]->Affiche();
 }

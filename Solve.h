@@ -2,6 +2,7 @@
 #include "Fonction.h"
 #include "Noeud.h"
 #include "Valeur.h"
+#include <string>
 
 #ifndef SOLVE
 #define SOLVE
@@ -18,10 +19,10 @@ class Solve{
     void evolve();
   
     //Getters
-    void affiche_final_fonction();
+    std::string affiche_final_fonction() const;
    
   protected:
-    Fonction ** popFonct_   ; // tableau de fonction 
+    Fonction ** popFonct_   ; // pointeur d'un tableau de pointeurs
     //int  HistoricFitness_ [];
     int nbGeneration_;
     bool ** x_  ;
