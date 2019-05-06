@@ -30,6 +30,7 @@ Fonction::Fonction(const Fonction& model){
 //Destructor// 
 Fonction::~Fonction(){
   AdressFirstNode_->Unasigne();
+  delete[] Nodes_;
 }
 
 //AdressFirstNode getter//
