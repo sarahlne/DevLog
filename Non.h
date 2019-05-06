@@ -10,6 +10,10 @@ Non(Noeud*);
 bool Calcule(bool*) const override;
 
 std::string Affiche() const override;
+
+void Unasigne()  override;
+
+Noeud* Copy() const override;
 //Atributs
 protected:
 Noeud* Noeud1_;

@@ -12,3 +12,15 @@ return  "("+Noeud1_->Affiche() +" And "+ Noeud2_->Affiche()+")";
 
 
 }
+
+void Et::Unasigne(){
+  Noeud1_->Unasigne();
+  Noeud2_->Unasigne();
+  delete this;
+  
+}
+
+Noeud* Et::Copy() const{
+return new Et(Noeud1_->Copy(),Noeud2_->Copy());
+
+}

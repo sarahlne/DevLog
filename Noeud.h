@@ -8,5 +8,12 @@ public:
 virtual bool Calcule(bool*) const=0;
 
 virtual std::string Affiche() const;
+
+
+virtual void Unasigne() =0;
+
+virtual Noeud* Copy() const =0;
+
+
 };
 #endif //NODE_

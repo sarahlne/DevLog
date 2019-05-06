@@ -19,6 +19,7 @@ Fonction::Fonction(const Fonction& model){
 
 //Destructor//
 Fonction::~Fonction(){
+  AdressFirstNode_->Unasigne();
 }
 
 //AdressFirstNode getter//

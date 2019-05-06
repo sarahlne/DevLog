@@ -12,3 +12,14 @@ return  "("+Noeud1_->Affiche() +" Or "+ Noeud2_->Affiche()+")";
 
 
 }
+
+void Ou::Unasigne(){
+  Noeud1_->Unasigne();
+  Noeud2_->Unasigne();
+  delete this;
+}
+
+Noeud* Ou::Copy() const{
+return new Ou(Noeud1_->Copy(),Noeud2_->Copy());
+
+}

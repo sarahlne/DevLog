@@ -92,12 +92,24 @@ std::cout << (tabN[13]->Affiche())<< std::endl;
 
 Ou Osup(&O2,&E1);
 Non Nsup(&E3);
-Et Esup(&Osup, &Nsup);
+Et* Esup=new Et(&Osup, &Nsup);
 
-std::cout << (Esup.Affiche())<< std::endl;
-std::cout << (Esup.Calcule(X))<< std::endl;
+std::cout << (Esup->Affiche())<< std::endl;
+std::cout << (Esup->Calcule(X))<< std::endl;
 
-Fonction F1(&Esup);
+Noeud* Ecopy1=Esup->Copy();
+Noeud* Ecopy2=Ecopy1->Copy();
+
+std::cout << (Ecopy1->Affiche())<< std::endl;
+std::cout << (Ecopy1->Calcule(X))<< std::endl;
+
+Ecopy1->Unasigne();
+
+std::cout << (Ecopy2->Affiche())<< std::endl;
+std::cout << (Ecopy2->Calcule(X))<< std::endl;
+
+Fonction F1(Ecopy2);
 std::cout << (F1.Affiche()) << std::endl;
+
 return 0;
 }
