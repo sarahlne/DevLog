@@ -1,6 +1,12 @@
 #include <iostream>
 #include <string>
 
+#include "Noeud.h"
+#include"Valeur.h"
+#include"Variable.h"
+#include"Ou.h"
+#include"Et.h"
+#include"Non.h"
 #include "Fonction.h"
 
 using std::cout;
@@ -28,7 +34,7 @@ Noeud* Fonction::get_Adress(){
 }
 
 // Calcul() method //
-bool Fonction::Calcule(bool input[]){
+bool Fonction::Calcule(bool* input){
 	return AdressFirstNode_->Calcule(input);
 }
 
@@ -36,5 +42,14 @@ bool Fonction::Calcule(bool input[]){
 std::string Fonction::Affiche(){
 	return AdressFirstNode_->Affiche();
 }
-
+// CaluleFitness() method //
+float Fonction::CalculeFitness(bool** input, int taille, bool* expect_results){
+	float Fitness=0.0;
+	for(int i = 0; i < taille; i++){
+		if ((AdressFirstNode_->Calcule(input[i]))==expect_results[i]) {
+			++Fitness;
+		}
+	}
+	return Fitness;
+}
 

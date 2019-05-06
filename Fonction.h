@@ -4,6 +4,11 @@
 #include <string>
 
 #include "Noeud.h"
+#include"Valeur.h"
+#include"Variable.h"
+#include"Ou.h"
+#include"Et.h"
+#include"Non.h"
 
 
 class Fonction{
@@ -24,11 +29,14 @@ class Fonction{
 	/* AdressFirstNode getter */
 	Noeud* get_Adress();
 	
-	/* Calcul methode */
-	bool Calcule(bool input[]);
+	/* Calcul() method */
+	bool Calcule(bool* input);
 	
-	/* Affiche method() */
+	/* Affiche() method() */
 	std::string Affiche();
+	
+	/* CalculeFitness() method */
+	float CalculeFitness(bool** input, int taille, bool expect_results[]); 
 	
 	protected:
 	
