@@ -18,3 +18,8 @@ return  (val_) ? std::string("True") : std::string("False");
 void Valeur::Unasigne() {
   delete this;
 }
+
+Noeud* Valeur::Copy() const{
+return new Valeur(val_);
+
+}

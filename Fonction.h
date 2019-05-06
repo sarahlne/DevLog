@@ -33,7 +33,7 @@ class Fonction{
 	private:
 	Noeud* AdressFirstNode_;
 	float Fitness_;
-  
+
 	
 };
 #endif //CHARACTER_

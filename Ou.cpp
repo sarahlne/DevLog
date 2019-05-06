@@ -18,3 +18,8 @@ void Ou::Unasigne(){
   Noeud2_->Unasigne();
   delete this;
 }
+
+Noeud* Ou::Copy() const{
+return new Ou(Noeud1_->Copy(),Noeud2_->Copy());
+
+}

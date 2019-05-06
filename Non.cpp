@@ -18,3 +18,8 @@ void Non::Unasigne(){
   Noeud1_->Unasigne();
   delete this;
 }
+
+Noeud* Non::Copy() const{
+return new Non(Noeud1_->Copy());
+
+}

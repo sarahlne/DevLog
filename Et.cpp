@@ -19,3 +19,8 @@ void Et::Unasigne(){
   delete this;
   
 }
+
+Noeud* Et::Copy() const{
+return new Et(Noeud1_->Copy(),Noeud2_->Copy());
+
+}

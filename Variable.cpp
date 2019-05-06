@@ -18,3 +18,8 @@ return  "X"+s;
 void Variable::Unasigne(){
   delete this;
 }
+
+Noeud* Variable::Copy() const{
+return new Variable(posit_);
+
+}

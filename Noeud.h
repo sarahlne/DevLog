@@ -12,6 +12,8 @@ virtual std::string Affiche() const;
 
 virtual void Unasigne() =0;
 
+virtual Noeud* Copy() const =0;
+
 
 };
 #endif //NODE_
