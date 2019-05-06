@@ -26,7 +26,7 @@ Noeud* Fonction::get_Adress(){
 	return AdressFirstNode_;
 }
 
-// Calcul() methode //
+// Calcul() method //
 bool Fonction::Calcule(bool input[]){
 	return AdressFirstNode_->Calcule(input);
 }
