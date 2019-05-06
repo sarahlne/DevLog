@@ -111,5 +111,10 @@ std::cout << (Ecopy2->Calcule(X))<< std::endl;
 Fonction F1(Ecopy2);
 std::cout << (F1.Affiche()) << std::endl;
 
+Fonction* F2= new Fonction(F1);
+
+std::cout << (F2->Affiche()) << std::endl;
+delete F2;
+delete Esup;
 return 0;
 }
