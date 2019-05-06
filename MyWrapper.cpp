@@ -66,7 +66,7 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 }
 
 
-static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
+/*static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
     PyListObject* listOfAs;
     int a = 0;
     if (!PyArg_ParseTuple(args, "O", &listOfAs)){
@@ -82,6 +82,7 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
   	PyObject* capsule = PyCapsule_New(my_A, NAME_CAPSULE_A, ACapsuleDestructor);
   	return Py_BuildValue("Oi",capsule,a);
 }
+*/
 
 
 // Module functions {<python function name>, <function in wrapper>, <parameters flag>, <doctring>}
@@ -89,11 +90,9 @@ static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
 static PyMethodDef module_funcs[] = {
 //4 trucs pour chaque methode : le nom de la focntion Python, nom de la methode en c++, type d'arguments ( laisser le METH_varrags , prends des arguments , puis la docstring
 // (PycFunction) pour dire à Pyhton , que c'est une capsule , à voir si c'est utile
-    {"generate_A", (PyCFunction)ATranslator, METH_VARARGS, "Create an instance of class A\n\nArgs:\n\ta (int): the parameter\n\nReturns:\n\t capsule: Object A capsule"},
-		{"generate_B", (PyCFunction)BTranslator, METH_VARARGS, "Create an instance of class B\n\nArgs:\n\tb (int): the parameter\n\nReturns:\n\t capsule: Object B capsule "},
-    {"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},
+    {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int dim the dimension of vectors that the Fonctions will take \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
+    /*{"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},*/
     {"print_A", PrintA, METH_VARARGS,  "Print class A instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule"},
-    {"print_B", PrintB, METH_VARARGS, "Print class B instance\n\n Args:\n\t capsuleA (Capsule) : object B capsule"},
 		{NULL, NULL, METH_NOARGS, NULL} // no args : ne prends pas d'arguments
 };
 
