@@ -34,7 +34,7 @@ class Fonction{
 	
 	private:
 	Noeud* AdressFirstNode_;
-  Noeud* Nodes_[100];
+  Noeud** Nodes_;
   size_t len_;
   size_t maxlen_;
 	

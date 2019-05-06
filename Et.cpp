@@ -24,3 +24,10 @@ Noeud* Et::Copy() const{
 return new Et(Noeud1_->Copy(),Noeud2_->Copy());
 
 }
+
+void Et::GetNods(Noeud** tab,int* posit) {
+  tab[*posit]=this;
+  posit ++;
+  Noeud1_->GetNods(tab,posit);
+  Noeud2_->GetNods(tab,posit);
+}

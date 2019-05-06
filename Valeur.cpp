@@ -23,3 +23,7 @@ Noeud* Valeur::Copy() const{
 return new Valeur(val_);
 
 }
+void Valeur::GetNods(Noeud** tab,int* posit){
+  tab[*posit]=this;
+  posit ++;
+}

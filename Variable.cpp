@@ -23,3 +23,7 @@ Noeud* Variable::Copy() const{
 return new Variable(posit_);
 
 }
+void Variable::GetNods(Noeud** tab,int* posit){
+  tab[*posit]=this;
+  posit ++;
+}
