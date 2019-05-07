@@ -1,8 +1,8 @@
 #include <Python.h> //include the "Python.h" header before any other include
 #include <stdio.h>
 #include <stdlib.h>
-//#include <string>
-//#include <math.h>
+#include <string>
+#include <math.h>
 #include <zlib.h>
 #include <errno.h>
 #include "def_PyC.h"
