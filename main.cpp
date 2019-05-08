@@ -9,8 +9,10 @@
 #include"Non.h"
 #include"Fonction.h"
 #include"Solve.h"
-
+#include <cstdlib>
+#include <ctime>
 int main(){
+srand(time(NULL));
 std::cout << "Bonjour monde" << std::endl;
 
 // test constructeur Valeur
@@ -209,6 +211,11 @@ std::cout << (V1.Affiche())+" remplace  True in : "+ (F2->Affiche()) << std::end
 F2->Remplace(0,&V1);
 
 std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+for(int i=0;i<10;i++){
+  F2->Mute();
+  std::cout <<" Mutate: "+ (F2->Affiche()) << std::endl;
+}
 
 delete F2;
 delete F3;

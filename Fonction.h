@@ -9,6 +9,9 @@
 #include"Ou.h"
 #include"Et.h"
 #include"Non.h"
+#include <cstdlib>
+#include <ctime>
+#include <random>
 
 class Fonction{
 	public:

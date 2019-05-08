@@ -7,6 +7,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+
 //Constructor//
 Fonction::Fonction(Noeud* noeud, int Var){
 	AdressFirstNode_ = noeud;
@@ -83,15 +84,19 @@ bool Fonction::Insertion(int posit,const Noeud* n){
   if(n->Noeud1_==nullptr){
     return false; //on ne peut pas insérer de valeur ou de variable (cela suprimerait le reste de la branche) 
   }
-  Noeud* InsN= n->Copy(); 
-  InsN->Noeud1_->Unasigne(); //on à créé une copie du Noeud à insérer auquel on à suprimé la branche ataché à son premier noeud.
-  if (posit==-1){  
+
+  if (posit==-1){ 
+    Noeud* InsN= n->Copy();
+    InsN->Noeud1_->Unasigne(); //on à créé une copie du Noeud à insérer auquel on à suprimé la branche ataché à son premier noeud. 
     InsN->Noeud1_=AdressFirstNode_;
     AdressFirstNode_=InsN; //On à insérer le noeud dans notre arbre
   }else{
     if(Nodes_[posit]->Noeud1_==nullptr){
+      
       return false; //on ne peut pas insérer  après une variable ou une valeur (il n'y à alors plus de branche)
     }
+    Noeud* InsN= n->Copy();
+    InsN->Noeud1_->Unasigne(); //on à créé une copie du Noeud à insérer auquel on à suprimé la branche ataché à son premier noeud.
     InsN->Noeud1_=Nodes_[posit]->Noeud1_;
     Nodes_[posit]->Noeud1_=InsN;//On à insérer le noeud dans notre arbre
 
@@ -102,7 +107,7 @@ bool Fonction::Insertion(int posit,const Noeud* n){
   return true;
 }
 bool Fonction::EchangeN1N2(int posit){
-  if (Nodes_[posit]->Noeud1_== nullptr or Nodes_[posit]->Noeud2_== nullptr){
+  if (posit==-1 or Nodes_[posit]->Noeud1_== nullptr or Nodes_[posit]->Noeud2_== nullptr ){
     return false;
   }
   Noeud * provisoir = Nodes_[posit]->Noeud1_;
@@ -114,7 +119,7 @@ bool Fonction::EchangeN1N2(int posit){
 
 bool Fonction::Remplace(int posit,const Noeud* n){
   if(posit==-1){
-    Noeud* InsN= n->Copy(); 
+    Noeud* InsN= n->Copy();
     if(AdressFirstNode_->Noeud1_!= nullptr and InsN->Noeud1_!= nullptr ){
       InsN->Noeud1_->Unasigne();
       InsN->Noeud1_=AdressFirstNode_->Noeud1_->Copy();
@@ -150,14 +155,14 @@ bool Fonction::Remplace(int posit,const Noeud* n){
 }
 
 void Fonction::Mute(){
-    int posit = rand() %(len_+1)-1;
-    int type = rand() % 4;
+    int posit = int((rand()/(double) RAND_MAX) *(len_+1))-1;
+    int type = int((rand()/(double) RAND_MAX) *4);
   if (type==0){
     this->Deletion(posit);
   }else if (type==1){
     this->EchangeN1N2(posit);
   }else if (type==2){
-    int operateur = rand() % 3;
+    int operateur = int((rand()/(double) RAND_MAX) *3);
     Valeur Nt(true);
     Valeur Nf(false);
     if (operateur==0){
@@ -171,6 +176,27 @@ void Fonction::Mute(){
       this->Insertion(posit,&N);
     }
   }else if (type==3){
+  int ntype1 = int((rand()/(double) RAND_MAX) *2);
+  int ntype2 = int((rand()/(double) RAND_MAX) *3);// obligé d'utiliser deux générateur car sinon la distribution est trop peu uniforme. Un des doublet va corespondre à une absence de mutation
+  
+    Valeur Nt(true);
+    Valeur Nf(false);
+    if (ntype1==0 and ntype2==0){
+      Ou O=Ou(&Nt,&Nf);
+      this->Remplace(posit,&O);
+    }else if (ntype1==1 and ntype2==0){
+      Et E=Et(&Nt,&Nf);
+      this->Remplace(posit,&E);
+    }else if (ntype2==2 and ntype1==0){
+      Non N=Non(&Nt);
+      this->Remplace(posit,&N);
+    }else if (ntype2==1 and ntype1==1){
+      (rand()%2==0)?this->Remplace(posit,&Nt):this->Remplace(posit,&Nf);
+    }else if (ntype2==1 and ntype1==0){
+      Variable V(rand()%Nombre_Var_);
+      this->Remplace(posit,&V);
+      
+    }
 
     
   }
