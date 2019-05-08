@@ -4,15 +4,22 @@
 #include <string>
 
 #include"Noeud.h"
+
 #include"Valeur.h"
 #include"Variable.h"
 #include"Ou.h"
 #include"Et.h"
 #include"Non.h"
+
 #include <cstdlib>
 #include <ctime>
 #include <random>
 
+
+
+
+extern int SIZE1;
+extern int SIZE2;
 class Fonction{
 	public:
 	Fonction() = delete;
@@ -31,10 +38,10 @@ class Fonction{
 	/* AdressFirstNode getter */
 	Noeud* get_Adress();
 	
-	/* Calcul methode */
-	bool Calcule(bool input[]);
+	/* Calcul() method */
+	bool Calcule(bool* input);
 	
-	/* Affiche method() */
+	/* Affiche() method() */
 	std::string Affiche();
 
   /*Deleltion methode
@@ -63,6 +70,11 @@ renvoi True si l'insertion s'est faite, False sinon*/
   /*Mute(int MutNumber)
 effectue (si elle est possibles) une transformation de type Remplace, Echange, Insertion ou Deletion sur des noeuds aléatoire de la fonction */
   void Mute();
+	
+	/* CalculeFitness() method */
+	float CalculeFitness(bool** input[3][2], bool expect_results[]);
+
+  float Fitness(bool** ,int range, bool *);  
 	
 	protected:
 	

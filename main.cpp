@@ -9,8 +9,15 @@
 #include"Non.h"
 #include"Fonction.h"
 #include"Solve.h"
+
 #include <cstdlib>
 #include <ctime>
+
+
+
+int SIZE1 = 3;
+int SIZE2 = 2;
+
 int main(){
 srand(time(NULL));
 std::cout << "Bonjour monde" << std::endl;
@@ -111,17 +118,69 @@ Ecopy1->Unasigne();
 std::cout << (Ecopy2->Affiche())<< std::endl;
 std::cout << (Ecopy2->Calcule(X))<< std::endl;
 
+
 Fonction F1(Ecopy2,2);
+
+
+// Test of declaration of a Fonction //
+
 std::cout << (F1.Affiche()) << std::endl;
 
-Solve S1();
-//std::cout << "\n affichage du solveur 1 \n " << S1.affiche_final_fonction() << std::endl;
+// Test of Calcul method of Fonction //
+
+bool* test[6];
+bool T1 = 0;  
+bool T2 = 0;
+bool T3 = 1;
+bool T4 = 0;
+bool T5 = 0;
+bool T6 = 1;
+
+test[0] = &T1;
+test[1] = &T2;
+test[2] = &T3;
+test[3] = &T4;
+test[4] = &T5; 
+test[5] = &T6;
+ 
+//Declaration de la matrice de pointeurs input
+bool** input[3][2]; 
+for(int i =0; i <3; ++i){
+	for(int j = 0; j<2; ++j){
+		input[i][j] = &test[i];
+	}
+}
+
+//Affichage des éléments de la matrice
+for(int i =0; i <3; ++i){
+	for(int j = 0; j<2; ++j){
+		std::cout << **input[i][j] << std::endl;
+	}
+}
+
+//Déclaration de la matrice des "résultats attendus"
+bool results[3];
+for (int i =0; i<3; i++){
+	results[i] = {0};
+}
+
+//Test de CalculFitness
+float result_Fitness = F1.CalculeFitness(input, results);
+std::cout << result_Fitness << std::endl; 
+
+
+Solve s1(3,5);
+
+Solve S1();  
+std::cout << "\n affichage du solveur 1 \n " ;
+s1.affiche_final_fonction() ;
 
 
 std::cout <<"Test Deletion"<< std::endl;
 Fonction* F2= new Fonction(F1);
 
 std::cout << (F2->Affiche()) << std::endl;
+
 
 F2->Deletion(-1);
 
@@ -216,9 +275,42 @@ for(int i=0;i<10;i++){
   F2->Mute();
   std::cout <<" Mutate: "+ (F2->Affiche()) << std::endl;
 }
+std::cout <<" test de fitness"<< std::endl;
+bool X1[2];
+X1[0]=true;
+X1[1]=false;
+bool X2[2];
+X2[0]=true;
+X2[1]=true;
+bool X3[2];
+X3[0]=false;
+X3[1]=false;
+bool X4[2];
+X4[0]=false;
+X4[1]=true;
+
+bool* Xx[4];
+Xx[0]=X1;
+Xx[1]=X2;
+Xx[2]=X3;
+Xx[3]=X4;
+
+bool Y[4];
+
+Y[0]=true;
+Y[1]=false;
+Y[2]=true;
+Y[3]=true;
+Fonction Fbonne(new Non(E3.Copy()),2);
+Fonction Fpasbonne(E3.Copy(),2);
+
+std::cout <<Fbonne.Fitness(Xx,4,Y)<< std::endl;
+std::cout <<Fpasbonne.Fitness(Xx,4,Y)<< std::endl;
+
 
 delete F2;
 delete F3;
 delete Esup;
+
 return 0;
 }

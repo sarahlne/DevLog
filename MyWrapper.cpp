@@ -1,18 +1,18 @@
 #include <Python.h> //include the "Python.h" header before any other include
 #include <stdio.h>
 #include <stdlib.h>
-//#include <string>
-//#include <math.h>
+#include <string>
+#include <math.h>
 #include <zlib.h>
 #include <errno.h>
+#include<iostream>
 #include "def_PyC.h"
 #include "Solve.h"
 
 // Name for the cpp object "capsules"
 #define NAME_CAPSULE_SOLVE "SOLVE"
 
-
-// Receives a Python capsule for object A, and extracts the pointer of the C++ object
+//Receives a Python capsule for object A, and extracts the pointer of the C++ object
 //Pyobjet : onejt du Python.h
 static Solve* SolvePythonToC(PyObject* args){
 	Solve* my_Solve;
@@ -28,14 +28,18 @@ static Solve* SolvePythonToC(PyObject* args){
 // Frees object A Python capsule
 void SolveCapsuleDestructor(PyObject* capsule){
 	Solve* my_solve = (Solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_SOLVE);
+
   delete my_solve;
 }
 
 
 // Calls the Print function of object A
-static PyObject*  PrintSolve(PyObject* self, PyObject* args){
+
+void PrintSolve(PyObject* self, PyObject* args){
     Solve*  my_Solve = SolvePythonToC(args);
+    std::cout<<"je suis avant la fleche"<<std::endl;
     my_Solve->affiche_final_fonction();
+    std::cout<<"je suis apres la fleche"<<std::endl;
     //renvoie un None de Python
     //Incremente , a chaque fois qu'il est creer , on incremente
     // 2 lignes pas forcement utile
@@ -94,7 +98,7 @@ static PyMethodDef module_funcs[] = {
 // (PycFunction) pour dire à Pyhton , que c'est une capsule , à voir si c'est utile
     {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int dim the dimension of vectors that the Fonctions will take \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
     /*{"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},*/
-    {"print_fonct", PrintSolve, METH_VARARGS,  "Print class Solve instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule \n\n Print the final Function find by the solver"},
+    {"print_fonct", (PyCFunction)PrintSolve, METH_VARARGS,  "Print class Solve instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule \n\n Print the final Function find by the solver"},
 		{NULL, NULL, METH_NOARGS, NULL} // no args : ne prends pas d'arguments
 };
 
@@ -112,7 +116,7 @@ static struct PyModuleDef moduledef = {
         NULL
 };
 
-PyMODINIT_FUNC PyInit_my_wrapper_c(void){
+PyMODINIT_FUNC PyInit_BinSymReg(void){
     PyObject* module = PyModule_Create(&moduledef);
 		return module;
 }

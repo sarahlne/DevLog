@@ -1,12 +1,17 @@
 #include <iostream>
 #include <string>
 
+#include "Noeud.h"
+#include"Valeur.h"
+#include"Variable.h"
+#include"Ou.h"
+#include"Et.h"
+#include"Non.h"
 #include "Fonction.h"
 
 using std::cout;
 using std::cin;
 using std::endl;
-
 
 //Constructor//
 Fonction::Fonction(Noeud* noeud, int Var){
@@ -43,7 +48,7 @@ Noeud* Fonction::get_Adress(){
 }
 
 // Calcul() method //
-bool Fonction::Calcule(bool input[]){
+bool Fonction::Calcule(bool* input){
 	return AdressFirstNode_->Calcule(input);
 }
 
@@ -51,9 +56,8 @@ bool Fonction::Calcule(bool input[]){
 std::string Fonction::Affiche(){
 	return AdressFirstNode_->Affiche();
 }
+
 //Deletion() methode//
-
-
 bool Fonction::Deletion(int posit){
   if (posit == -1){ //cas ou l'on suprime le premier noeud
     if(AdressFirstNode_->Noeud1_!=nullptr){// on ne veux pas suprimer une variable
@@ -200,6 +204,28 @@ void Fonction::Mute(){
 
     
   }
+}
 
+// CaluleFitness() method //
+
+float Fonction::CalculeFitness(bool** input[3][2], bool expect_results[]){
+	float Fitness=0.0;
+	for(int i = 0; i < 3; i++){
+		bool* var=*input[i][0];
+		if ((AdressFirstNode_->Calcule(var))== expect_results[i]) {
+			++Fitness;
+		}
+	}
+	return Fitness;
+
+}
+float Fonction::Fitness(bool** in,int range , bool * out){
+  float Fitness=0.0;
+  for(size_t i = 0; i < range; i++){
+    if (Calcule(in[i])==out[i]){
+       ++Fitness;
+     }
+  }
+  return Fitness;
 }
 
