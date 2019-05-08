@@ -10,6 +10,7 @@
 #include"Et.h"
 #include"Non.h"
 
+
 extern int SIZE1;
 extern int SIZE2;
 class Fonction{

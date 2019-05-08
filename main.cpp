@@ -111,12 +111,12 @@ Ecopy1->Unasigne();
 std::cout << (Ecopy2->Affiche())<< std::endl;
 std::cout << (Ecopy2->Calcule(X))<< std::endl;
 
+
 // Test of declaration of a Fonction //
 Fonction F1(Ecopy2);
 std::cout << (F1.Affiche()) << std::endl;
 
 // Test of Calcul method of Fonction //
-
 
 bool* test[6];
 bool T1 = 0;  
@@ -125,8 +125,6 @@ bool T3 = 1;
 bool T4 = 0;
 bool T5 = 0;
 bool T6 = 1;
-
-
 
 test[0] = &T1;
 test[1] = &T2;
