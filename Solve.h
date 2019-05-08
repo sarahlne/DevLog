@@ -70,7 +70,6 @@ class Solve{
     
 };
 
-//Getter
 
 
 

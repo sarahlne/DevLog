@@ -7,7 +7,7 @@
 
 // Constructeur par défaut
 Solve::Solve(){
-  lambda_=5;
+lambda_=5;
   nbvar_=3;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
   popFonct_[0]=new Fonction(new Valeur(true));
@@ -25,7 +25,7 @@ Solve::Solve(int dim , int nbfille){
 }
 //destructeur
 Solve::~Solve(){
-  for(int i; i<lambda_; i++){ //delete chaque pointeur de tableau
+  for(int i=0; i<lambda_; i++){ //delete chaque pointeur de tableau
     delete popFonct_[i];
   } 
   free(popFonct_) ;
@@ -36,7 +36,7 @@ Solve::~Solve(){
 
 int Solve::bestFitness(int * HistoricFitness_){//return l'emplacement de la meilleur fitness du tableau
   int place;
-  for(int i; i<lambda_;++i){
+  for(int i=0; i<lambda_;++i){
     int best = HistoricFitness_[0];
     
     if(HistoricFitness_[i]>best){
@@ -48,12 +48,10 @@ int Solve::bestFitness(int * HistoricFitness_){//return l'emplacement de la meil
 }
 
 void Solve::ReplaceFitness(int place){
-
   HistoricFitness_[0]=HistoricFitness_[place]; 
 }
 
 Fonction * Solve::bestFct(Fonction ** popFonct_,int place){//return le meilleure fonction
-
   return popFonct_[place];
 }
 
