@@ -115,6 +115,8 @@ std::cout << (F1.Affiche()) << std::endl;
 Solve S1();
 //std::cout << "\n affichage du solveur 1 \n " << S1.affiche_final_fonction() << std::endl;
 
+
+std::cout <<"Test Deletion"<< std::endl;
 Fonction* F2= new Fonction(F1);
 
 std::cout << (F2->Affiche()) << std::endl;
@@ -137,6 +139,33 @@ F3->Deletion(0);
 
 std::cout << (F3->Affiche()) << std::endl;
 
+std::cout <<"Test Insertion"<< std::endl;
+
+std::cout <<(O2.Affiche())+" insert in head of "+ (F2->Affiche()) << std::endl;
+
+F2->Insertion(-1,&O2);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+std::cout << (E3.Affiche())+" insert in head of"+ (F2->Affiche()) << std::endl;
+
+F2->Insertion(-1,&E3);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+std::cout << (N1.Affiche())+" insert in head of"+ (F2->Affiche()) << std::endl;
+
+F2->Insertion(-1,&N1);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+std::cout << (N1.Affiche())+" insert after head of "+ (F2->Affiche()) << std::endl;
+
+F2->Insertion(1,&N1);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+F3->Deletion(-1);
 delete F2;
 delete F3;
 delete Esup;

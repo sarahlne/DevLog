@@ -3,8 +3,12 @@
 #include <iostream>
 #include <string>
 
-#include "Noeud.h"
-
+#include"Noeud.h"
+#include"Valeur.h"
+#include"Variable.h"
+#include"Ou.h"
+#include"Et.h"
+#include"Non.h"
 
 class Fonction{
 	public:
@@ -35,6 +39,12 @@ provoque une deletion du noeud suivant le noeud à la position posit, si c'est p
 renvoi True si la deletion s'est faite, False sinon*/
  
   bool Deletion(int posit);
+
+  /*Insertion methode
+provoque une insertion d'un noeud après le noeud à la position posit(si -1 avant le premier noeud) si c'est possible.
+renvoi True si la deletion s'est faite, False sinon*/
+ 
+  bool Insertion(int ,const Noeud*);
 	
 	protected:
 	
