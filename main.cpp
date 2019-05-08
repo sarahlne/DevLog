@@ -114,19 +114,51 @@ std::cout << (F1.Affiche()) << std::endl;
 
 // Test of Calcul method of Fonction //
 
-bool** input;
-bool* result;
-result[0] = 1;
-result[1] = 1;
-result[2] = 1;
-input[0][0] = 0;
-input[2][0] = 0;
-input[0][1]=0;
-input[1][0]= 1;
-input[1][1]= 1;
-input[2][1] = 1;
 
-float result_Fitness = F1.CalculeFitness(input, 3, result);
-std::cout << result_Fitness << std::endl;
+bool* test[6];
+bool T1 = 0;  
+bool T2 = 0;
+bool T3 = 1;
+bool T4 = 0;
+bool T5 = 0;
+bool T6 = 1;
+
+
+
+test[0] = &T1;
+test[1] = &T2;
+test[2] = &T3;
+test[3] = &T4;
+test[4] = &T5; 
+test[5] = &T6;
+ 
+//Declaration de la matrice de pointeurs input
+int size1 = 3; 
+int size2 = 2;
+bool** input[3][2]; 
+for(int i =0; i <3; ++i){
+	for(int j = 0; j<2; ++j){
+		input[i][j] = &test[i];
+	}
+}
+
+//Affichage des éléments de la matrice
+for(int i =0; i <3; ++i){
+	for(int j = 0; j<2; ++j){
+		std::cout << **input[i][j] << std::endl;
+	}
+}
+
+//Déclaration de la matrice des "résultats attendus"
+bool results[3];
+for (int i =0; i<3; i++){
+	results[i] = {0};
+}
+
+
+float result_Fitness = F1.CalculeFitness(input, results);
+std::cout << result_Fitness << std::endl; 
+
+
 return 0;
 }

@@ -10,7 +10,8 @@
 #include"Et.h"
 #include"Non.h"
 
-
+int a = 3;
+int b = 2;
 class Fonction{
 	public:
 	Fonction() = delete;
@@ -36,7 +37,7 @@ class Fonction{
 	std::string Affiche();
 	
 	/* CalculeFitness() method */
-	float CalculeFitness(bool** input, int taille, bool expect_results[]); 
+	float CalculeFitness(bool** input[3][2], bool expect_results[]); 
 	
 	protected:
 	

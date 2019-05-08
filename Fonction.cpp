@@ -43,10 +43,12 @@ std::string Fonction::Affiche(){
 	return AdressFirstNode_->Affiche();
 }
 // CaluleFitness() method //
-float Fonction::CalculeFitness(bool** input, int taille, bool* expect_results){
+
+float Fonction::CalculeFitness(bool** input[3][2], bool expect_results[]){
 	float Fitness=0.0;
-	for(int i = 0; i < taille; i++){
-		if ((AdressFirstNode_->Calcule(input[i]))==expect_results[i]) {
+	for(int i = 0; i < 3; i++){
+		bool* var=*input[i][0];
+		if ((AdressFirstNode_->Calcule(var))== expect_results[i]) {
 			++Fitness;
 		}
 	}
