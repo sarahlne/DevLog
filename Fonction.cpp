@@ -8,8 +8,9 @@ using std::cin;
 using std::endl;
 
 //Constructor//
-Fonction::Fonction(Noeud* noeud){
+Fonction::Fonction(Noeud* noeud, int Var){
 	AdressFirstNode_ = noeud;
+  Nombre_Var_=Var;
   maxlen_=100;
   Nodes_=new Noeud*[100];
   int posit=0;
@@ -21,6 +22,7 @@ Fonction::Fonction(Noeud* noeud){
 //Copy constructor//
 Fonction::Fonction(const Fonction& model){
 	AdressFirstNode_ = model.AdressFirstNode_->Copy();
+  Nombre_Var_=model.Nombre_Var_;
   len_= model.len_;
   maxlen_=100;
   int posit=0;
@@ -145,5 +147,33 @@ bool Fonction::Remplace(int posit,const Noeud* n){
   AdressFirstNode_->GetNods(Nodes_,&p); // on recré la liste des noeuds
   len_=p;// on recaclcule la taille de la fonction 
   return true;
+}
+
+void Fonction::Mute(){
+    int posit = rand() %(len_+1)-1;
+    int type = rand() % 4;
+  if (type==0){
+    this->Deletion(posit);
+  }else if (type==1){
+    this->EchangeN1N2(posit);
+  }else if (type==2){
+    int operateur = rand() % 3;
+    Valeur Nt(true);
+    Valeur Nf(false);
+    if (operateur==0){
+      Ou O=Ou(&Nt,&Nf);
+      this->Insertion(posit,&O);
+    }else if (operateur==1){
+      Et E=Et(&Nt,&Nf);
+      this->Insertion(posit,&E);
+    }else if (operateur==2){
+      Non N=Non(&Nt);
+      this->Insertion(posit,&N);
+    }
+  }else if (type==3){
+
+    
+  }
+
 }
 

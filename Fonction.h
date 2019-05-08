@@ -14,7 +14,7 @@ class Fonction{
 	public:
 	Fonction() = delete;
 	/* Constructor */
-	Fonction(Noeud* noeud);
+	Fonction(Noeud* noeud,int);
 	
 	/* Copy constructor */
 	Fonction(const Fonction& model);
@@ -56,6 +56,10 @@ renvoi True si l'échange s'est fait, False sinon*/
 remplace le noeud par le noeud en parametre(copie) après le noeud à la position posit(si -1 ainsertion en tête) si c'est possible.
 renvoi True si l'insertion s'est faite, False sinon*/
   bool Remplace(int posit,const Noeud*);
+
+  /*Mute(int MutNumber)
+effectue (si elle est possibles) une transformation de type Remplace, Echange, Insertion ou Deletion sur des noeuds aléatoire de la fonction */
+  void Mute();
 	
 	protected:
 	
@@ -64,6 +68,7 @@ renvoi True si l'insertion s'est faite, False sinon*/
   Noeud** Nodes_;
   size_t len_;
   size_t maxlen_;
+  int Nombre_Var_;
 	
 };
 #endif //CHARACTER_

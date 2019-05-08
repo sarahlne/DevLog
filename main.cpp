@@ -109,7 +109,7 @@ Ecopy1->Unasigne();
 std::cout << (Ecopy2->Affiche())<< std::endl;
 std::cout << (Ecopy2->Calcule(X))<< std::endl;
 
-Fonction F1(Ecopy2);
+Fonction F1(Ecopy2,2);
 std::cout << (F1.Affiche()) << std::endl;
 
 Solve S1();

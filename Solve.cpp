@@ -9,14 +9,14 @@ Solve::Solve(){
   lambda_=5;
   nbvar_=3;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
-  popFonct_[0]=new Fonction(new Valeur(true));
+  popFonct_[0]=new Fonction(new Valeur(true),nbvar_);
 }
 
 Solve::Solve(int dim , int nbfille){
   lambda_=nbfille;
   nbvar_=dim;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
-  popFonct_[0]=new Fonction(new Valeur(true));
+  popFonct_[0]=new Fonction(new Valeur(true),nbvar_);
 }
 //destructeur
 Solve::~Solve(){
