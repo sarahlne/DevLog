@@ -39,7 +39,6 @@ void PrintSolve(PyObject* self, PyObject* args){
     Solve*  my_Solve = SolvePythonToC(args);
     std::cout<<"addresse dans Print"<<&my_Solve<<std::endl;
     my_Solve->affiche_final_fonction();
-    (void*)(*mySolve)
     //renvoie un None de Python
     //Incremente , a chaque fois qu'il est creer , on incremente
     // 2 lignes pas forcement utile
