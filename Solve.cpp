@@ -5,7 +5,8 @@
 
 //##################CONSTRUCTORS and DESTRUCTORS ##################
 
-// Constructeur par défaut
+// Constructeur par défaut (très mauvaise idée, ne fait pas de sens)(Titouan)
+/*
 Solve::Solve(){
   lambda_=5;
   nbvar_=3;
@@ -20,13 +21,18 @@ Solve::Solve(){
   }
   //HistoricFitness_[0]=new int(popFonct_[0].fitness());
 }
-
-Solve::Solve(int dim , int nbfille){
+*/
+Solve::Solve(int dim , int nbfille,bool** X,int rangeX, bool *Y, int generations){
   lambda_= nbfille;
   nbvar_= dim;
+  x_=X;
+  y_=Y;
+  rangex_=rangeX;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
 
   popFonct_[0]=new Fonction(new Valeur(true),nbvar_);
+  nbGeneration_=generations;
+  HistoricFitness_=new int[nbGeneration_];
 
   //il faut initialiser les cases de popFonct_
   for (int i=1; i<lambda_; i++){
@@ -45,7 +51,8 @@ Solve::~Solve(){
       delete popFonct_[i];
     }
   } 
-  free(popFonct_) ; 
+  free(popFonct_) ;
+  delete[] HistoricFitness_;
 }
 
 //##################FUNCTIONS##################

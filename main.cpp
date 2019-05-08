@@ -169,9 +169,9 @@ float result_Fitness = F1.CalculeFitness(input, results);
 std::cout << result_Fitness << std::endl; 
 
 
-Solve s11;  //genere un seg fault
-std::cout << "\n affichage du solveur 1 : \n " ;
-s11.affiche_final_fonction() ;
+//Solve s11;  //genere un seg fault
+//std::cout << "\n affichage du solveur 1 : \n " ;
+//s11.affiche_final_fonction() ;
 //Solve s12;
 //std::cout << "\n affichage du solveur 2 : \n " ;
 //s12.affiche_final_fonction() ; 
@@ -309,7 +309,8 @@ Fonction Fpasbonne(E3.Copy(),2);
 std::cout <<Fbonne.Fitness(Xx,4,Y)<< std::endl;
 std::cout <<Fpasbonne.Fitness(Xx,4,Y)<< std::endl;
 
-
+std::cout <<" test de constructeur solveur"<< std::endl;
+Solve s1(2,5,Xx,4,Y,50);
 
 //on ne peut pas appeler le delete sur F2 et Esup car pas de destructeur
 

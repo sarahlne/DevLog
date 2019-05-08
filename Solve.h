@@ -10,8 +10,8 @@
 class Solve{
   public:
     //Constructeur
-    Solve();
-    Solve(int dim , int nbfille);
+    //Solve(); (en veilleuse pour le moment, dangeureux )
+    Solve(int dim , int nbfille,bool** X,int rangeX, bool *Y,int generations);
     
     //destructeur
     ~Solve();
@@ -67,6 +67,7 @@ class Solve{
     bool * y_  ;
     int lambda_ ; //nombre d'enfants crée à chaque génération
     int nbvar_; // nombre de variables , ex (x1,x2,x3) nbvar=3
+    int rangex_;//nombre de serie de variable
     
 };
 
