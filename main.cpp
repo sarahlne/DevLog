@@ -113,18 +113,19 @@ Fonction F1(Ecopy2);
 std::cout << (F1.Affiche()) << std::endl;
 
 
-Solve s1(3,5);
-
-Solve S1();  
-std::cout << "\n affichage du solveur 1 \n " ;
-s1.affiche_final_fonction() ;
+Solve s11;  //genere un seg fault
+std::cout << "\n affichage du solveur 1 : \n " ;
+s11.affiche_final_fonction() ;
+//Solve s12;
+//std::cout << "\n affichage du solveur 2 : \n " ;
+//s12.affiche_final_fonction() ; 
 
 Fonction* F2= new Fonction(F1);
 
 std::cout << (F2->Affiche()) << std::endl;
+//on ne peut pas appeler le delete sur F2 et Esup car pas de destructeur
 delete F2;
 delete Esup;
-
 
 
 return 0;

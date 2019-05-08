@@ -37,9 +37,9 @@ void SolveCapsuleDestructor(PyObject* capsule){
 
 void PrintSolve(PyObject* self, PyObject* args){
     Solve*  my_Solve = SolvePythonToC(args);
-    std::cout<<"je suis avant la fleche"<<std::endl;
+    std::cout<<"addresse dans Print"<<&my_Solve<<std::endl;
     my_Solve->affiche_final_fonction();
-    std::cout<<"je suis apres la fleche"<<std::endl;
+    (void*)(*mySolve)
     //renvoie un None de Python
     //Incremente , a chaque fois qu'il est creer , on incremente
     // 2 lignes pas forcement utile
@@ -64,7 +64,9 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 		return NULL;
 	}
 	Solve* my_Solve = new Solve(lambda,dim);
+    std::cout<<"addresse my Solve dans Solve Translator"<<&my_Solve<<std::endl;
 	PyObject* capsule = PyCapsule_New(my_Solve, NAME_CAPSULE_SOLVE, SolveCapsuleDestructor);
+    std::cout<<"addresse capsule dans translator"<<&capsule<<std::endl;
 	//creer la capsule 
 	//Py capsule : du Python .h 
 	//arguments : l'objet- pointeur c++, nom Capsule ( du #define au début) , le destructeur pour vider la capsule

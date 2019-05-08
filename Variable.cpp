@@ -13,12 +13,11 @@ return b[posit_];
 //std::string s= std::to_string(posit_);
 std::string s= std::to_string(static_cast<int>(posit_));
 return  "X"+s;
-}
-*/
+}*/
 
 std::string Variable::Affiche() const{
 std::ostringstream ostr;
-ostr<<"X"<<std::boolalpha<<posit_;
+ostr<<"X"<<posit_;
 return  ostr.str();;
 }
 

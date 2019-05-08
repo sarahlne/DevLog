@@ -60,7 +60,7 @@ class Solve{
     void affiche_final_fonction() const;
    
   protected:
-    Fonction ** popFonct_   ; // pointeur d'un tableau de pointeurs
+    Fonction ** popFonct_ ; // pointeur d'un tableau de pointeurs
     int * HistoricFitness_ ;
     int nbGeneration_;
     bool ** x_  ;
