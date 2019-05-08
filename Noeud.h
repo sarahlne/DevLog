@@ -19,6 +19,7 @@ virtual void GetNods(Noeud**,int*)  =0;
 
 protected:
 Noeud* Noeud1_=nullptr;
+Noeud* Noeud2_=nullptr;
 
 friend class Fonction; // je n'ai pas réussi à rendre friend les methode de function, juste la classe elle même, sinon je dois includ la classe ce qui pose un problème car elle inclu elle même noeud
 
