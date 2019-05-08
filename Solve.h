@@ -57,7 +57,7 @@ class Solve{
 
   
     //Getters
-    std::string affiche_final_fonction() const;
+    void affiche_final_fonction() const;
    
   protected:
     Fonction ** popFonct_   ; // pointeur d'un tableau de pointeurs

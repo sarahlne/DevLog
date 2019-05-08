@@ -1,4 +1,5 @@
 #include "Solve.h"
+#include<iostream>
 
 
 
@@ -83,7 +84,6 @@ void Solve::evolve(int nbGeneration,Fonction ** popFonct_,int * HistoricFitness_
   }
 }
 
-
-std::string Solve::affiche_final_fonction()const{
-	return popFonct_[0]->Affiche();
+void Solve::affiche_final_fonction()const{
+	std::cout<<popFonct_[0]->Affiche()<<std::endl;
 }

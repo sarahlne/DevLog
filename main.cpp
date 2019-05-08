@@ -116,7 +116,7 @@ std::cout << (F1.Affiche()) << std::endl;
 Solve s1(3,5);
 
 Solve S1();  
-//std::cout << "\n affichage du solveur 1 \n " << S1.affiche_final_fonction() << std::endl;
+std::cout << "\n affichage du solveur 1 \n " << s1.affiche_final_fonction() << std::endl;
 
 Fonction* F2= new Fonction(F1);
 
