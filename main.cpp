@@ -181,6 +181,34 @@ F2->EchangeN1N2(1);
 
 std::cout <<" result: "+ (F2->Affiche()) << std::endl;
 
+std::cout <<"Test Remplace"<< std::endl;
+
+
+
+
+std::cout << (E1.Affiche())+" remplace  head of : "+ (F2->Affiche()) << std::endl;
+
+F2->Remplace(-1,&E1);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+std::cout << (O3.Affiche())+" remplace  head of : "+ (F2->Affiche()) << std::endl;
+
+F2->Remplace(-1,&O3);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+std::cout << (N1.Affiche())+" remplace  head of : "+ (F2->Affiche()) << std::endl;
+
+F2->Remplace(-1,&N1);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+std::cout << (V1.Affiche())+" remplace  True in : "+ (F2->Affiche()) << std::endl;
+
+F2->Remplace(0,&V1);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
 
 delete F2;
 delete F3;

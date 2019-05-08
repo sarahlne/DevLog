@@ -110,3 +110,40 @@ bool Fonction::EchangeN1N2(int posit){
 
 }
 
+bool Fonction::Remplace(int posit,const Noeud* n){
+  if(posit==-1){
+    Noeud* InsN= n->Copy(); 
+    if(AdressFirstNode_->Noeud1_!= nullptr and InsN->Noeud1_!= nullptr ){
+      InsN->Noeud1_->Unasigne();
+      InsN->Noeud1_=AdressFirstNode_->Noeud1_->Copy();
+      if(AdressFirstNode_->Noeud2_!= nullptr and InsN->Noeud2_!= nullptr){
+          InsN->Noeud2_->Unasigne();
+          InsN->Noeud2_=AdressFirstNode_->Noeud2_->Copy();
+      }
+    
+    }
+    AdressFirstNode_->Unasigne();
+    AdressFirstNode_=InsN;
+  }
+  else if (Nodes_[posit]->Noeud1_== nullptr){
+    return false;
+  }else{
+    Noeud* InsN= n->Copy(); 
+    if(Nodes_[posit]->Noeud1_->Noeud1_!= nullptr and InsN->Noeud1_!= nullptr ){
+      InsN->Noeud1_->Unasigne();
+      InsN->Noeud1_=Nodes_[posit]->Noeud1_->Noeud1_->Copy();
+      if(Nodes_[posit]->Noeud1_->Noeud2_!= nullptr and InsN->Noeud2_!= nullptr){
+          InsN->Noeud2_->Unasigne();
+          InsN->Noeud2_=Nodes_[posit]->Noeud1_->Noeud2_->Copy();
+      }
+      
+    }
+    Nodes_[posit]->Noeud1_->Unasigne();
+    Nodes_[posit]->Noeud1_=InsN;
+  }   
+  int p=0;
+  AdressFirstNode_->GetNods(Nodes_,&p); // on recré la liste des noeuds
+  len_=p;// on recaclcule la taille de la fonction 
+  return true;
+}
+

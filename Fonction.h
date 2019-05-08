@@ -47,10 +47,15 @@ renvoi True si l'insertion s'est faite, False sinon*/
   bool Insertion(int posit,const Noeud*);
 
 
-  /*EchangeN1N2
+  /*EchangeN1N2(posit)
 provoque l'échange de Noeud1_ et Noeud2_ à la position posit si c'est possible.(Un grand nombre de methode agissent sur Noeud1_ et non Noeud2_, concrètement cette methode permet d'établir une équivalence entre Noeud1_ et Noeud2_ dans la façon dont il seront ciblé par les methodes)
 renvoi True si l'échange s'est fait, False sinon*/
   bool EchangeN1N2(int posit);
+
+  /*Remplace(int posit,const Noeud*)
+remplace le noeud par le noeud en parametre(copie) après le noeud à la position posit(si -1 ainsertion en tête) si c'est possible.
+renvoi True si l'insertion s'est faite, False sinon*/
+  bool Remplace(int posit,const Noeud*);
 	
 	protected:
 	
