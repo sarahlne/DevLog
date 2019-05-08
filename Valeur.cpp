@@ -3,6 +3,7 @@
 Valeur::Valeur(bool b):val_(b){
 }
 
+
 bool Valeur::Calcule(bool* b) const{
 
 return val_;
@@ -22,4 +23,8 @@ void Valeur::Unasigne() {
 Noeud* Valeur::Copy() const{
 return new Valeur(val_);
 
+}
+void Valeur::GetNods(Noeud** tab,int* posit){
+  tab[*posit]=this;
+  *posit = *posit+1;
 }
