@@ -169,17 +169,19 @@ float result_Fitness = F1.CalculeFitness(input, results);
 std::cout << result_Fitness << std::endl; 
 
 
-Solve s1(3,5);
-
-Solve S1();  
-std::cout << "\n affichage du solveur 1 \n " ;
-s1.affiche_final_fonction() ;
+Solve s11;  //genere un seg fault
+std::cout << "\n affichage du solveur 1 : \n " ;
+s11.affiche_final_fonction() ;
+//Solve s12;
+//std::cout << "\n affichage du solveur 2 : \n " ;
+//s12.affiche_final_fonction() ; 
 
 
 std::cout <<"Test Deletion"<< std::endl;
 Fonction* F2= new Fonction(F1);
 
 std::cout << (F2->Affiche()) << std::endl;
+
 
 
 F2->Deletion(-1);
@@ -307,6 +309,9 @@ Fonction Fpasbonne(E3.Copy(),2);
 std::cout <<Fbonne.Fitness(Xx,4,Y)<< std::endl;
 std::cout <<Fpasbonne.Fitness(Xx,4,Y)<< std::endl;
 
+
+
+//on ne peut pas appeler le delete sur F2 et Esup car pas de destructeur
 
 delete F2;
 delete F3;

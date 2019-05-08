@@ -7,32 +7,45 @@
 
 // Constructeur par défaut
 Solve::Solve(){
-lambda_=5;
+  lambda_=5;
   nbvar_=3;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
+
   popFonct_[0]=new Fonction(new Valeur(true),nbvar_);
 
   //HistoricFitness_[0]=new int(popFonct_[0.fitness()]);
-
-
+  //il faut initialiser les cases de popFonct_
+  for (int i=1; i<lambda_; i++){
+    popFonct_[i]=NULL;
+  }
+  //HistoricFitness_[0]=new int(popFonct_[0].fitness());
 }
 
 Solve::Solve(int dim , int nbfille){
-  lambda_=nbfille;
-  nbvar_=dim;
+  lambda_= nbfille;
+  nbvar_= dim;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
+
   popFonct_[0]=new Fonction(new Valeur(true),nbvar_);
 
-  //HistoricFitness_[0]=new int(popFonct_[0].fitness());
+  //il faut initialiser les cases de popFonct_
+  for (int i=1; i<lambda_; i++){
+    popFonct_[i]=NULL;
+  }
 
+  //HistoricFitness_[0]=new int(popFonct_[0].fitness());
 }
+
 //destructeur
 Solve::~Solve(){
   for(int i=0; i<lambda_; i++){ //delete chaque pointeur de tableau
-    delete popFonct_[i];
+    //vérifie que  le pointeur n'est pas nulle , c'est à dire , si il y a une valeur on le supprime
+    //faire ça a chaque fois qu'on supprimer les éléments de popFunction
+    if (popFonct_[i]){
+      delete popFonct_[i];
+    }
   } 
-  free(popFonct_) ;
-  
+  free(popFonct_) ; 
 }
 
 //##################FUNCTIONS##################
@@ -63,7 +76,9 @@ void Solve::PlacementFct(int place ){//Met la meilleure fonction en premier rang
   Fonction* f1 = bestFct(popFonct_,place);
   
   for(int i=0;i<lambda_;++i){
-    delete popFonct_[i];  
+    if (popFonct_[i]){
+      delete popFonct_[i];
+    }
   }
   
   popFonct_[0]=f1;
