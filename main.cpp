@@ -118,9 +118,27 @@ Solve S1();
 Fonction* F2= new Fonction(F1);
 
 std::cout << (F2->Affiche()) << std::endl;
+
+F2->Deletion(-1);
+
+std::cout << (F2->Affiche()) << std::endl;
+
+F2->Deletion(-1);
+
+std::cout << (F2->Affiche()) << std::endl;
+
+F2->Deletion(-1);
+
+std::cout << (F2->Affiche()) << std::endl;
+
+Fonction* F3= new Fonction(F1);
+
+F3->Deletion(0);
+
+std::cout << (F3->Affiche()) << std::endl;
+
 delete F2;
+delete F3;
 delete Esup;
-
-
 return 0;
 }

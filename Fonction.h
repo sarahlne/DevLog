@@ -29,6 +29,12 @@ class Fonction{
 	
 	/* Affiche method() */
 	std::string Affiche();
+
+  /*Deleltion methode
+provoque une deletion du noeud suivant le noeud à la position posit, si c'est possible.
+renvoi True si la deletion s'est faite, False sinon*/
+ 
+  bool Deletion(int posit);
 	
 	protected:
 	

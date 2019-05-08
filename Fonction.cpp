@@ -10,10 +10,11 @@ using std::endl;
 //Constructor//
 Fonction::Fonction(Noeud* noeud){
 	AdressFirstNode_ = noeud;
-  len_=1;
   maxlen_=100;
   Nodes_=new Noeud*[100];
-  Nodes_[0]=AdressFirstNode_;
+  int posit=0;
+  AdressFirstNode_->GetNods(Nodes_,&posit);
+  len_=posit;
   
 }
 
@@ -47,5 +48,34 @@ bool Fonction::Calcule(bool input[]){
 std::string Fonction::Affiche(){
 	return AdressFirstNode_->Affiche();
 }
+//Deletion() methode//
 
 
+  bool Fonction::Deletion(int posit){
+  if (posit == -1){ //cas ou l'on suprime le premier noeud
+    if(AdressFirstNode_->Noeud1_!=nullptr){// on ne veux pas suprimer une variable
+      Noeud* Nprov = AdressFirstNode_;// on sauvegarde l'adresse de la branche que l'on va suprimer
+      AdressFirstNode_=AdressFirstNode_->Noeud1_->Copy();// on cré une nouvelle branche, copie de la branche actuelle avec un noeud en moins, on l'acroche à notre arbre à la place de la branche que l'on va suprimer
+      Nprov->Unasigne();//On suprime l'ancienne branche
+      int posit=0;
+      AdressFirstNode_->GetNods(Nodes_,&posit); // on recré la liste des noeuds
+      len_=posit;
+      return true;
+    }
+   return false;    
+  }
+  else{
+    if(Nodes_[posit]->Noeud1_!=nullptr and  Nodes_[posit]->Noeud1_->Noeud1_!=nullptr){// Une variable n'a pas de noeud suivant et on ne veux pas suprimer une variable
+      Noeud* Nprov = Nodes_[posit]->Noeud1_;
+      Nodes_[posit]->Noeud1_=Nodes_[posit]->Noeud1_->Noeud1_->Copy();
+      Nprov->Unasigne();
+      int posit=0;
+      AdressFirstNode_->GetNods(Nodes_,&posit);
+      len_=posit;
+      return true;
+    }
+   return false;
+  }
+
+
+}
