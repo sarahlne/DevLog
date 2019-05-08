@@ -18,7 +18,6 @@ Noeud* Copy() const override;
 void GetNods(Noeud**,int*) override;
 //Atributs
 protected:
-Noeud* Noeud1_;
 
 };
 #endif //NON_

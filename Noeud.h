@@ -16,6 +16,9 @@ virtual Noeud* Copy() const =0;
 
 virtual void GetNods(Noeud**,int*)  =0;
 
+protected:
+Noeud* Noeud1_=nullptr;
+
 
 };
 #endif //NODE_
