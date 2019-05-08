@@ -41,10 +41,16 @@ renvoi True si la deletion s'est faite, False sinon*/
   bool Deletion(int posit);
 
   /*Insertion methode
-provoque une insertion d'un noeud après le noeud à la position posit(si -1 avant le premier noeud) si c'est possible.
-renvoi True si la deletion s'est faite, False sinon*/
+provoque une insertion d'un noeud (copie) après le noeud à la position posit(si -1 ainsertion en tête) si c'est possible.
+renvoi True si l'insertion s'est faite, False sinon*/
  
-  bool Insertion(int ,const Noeud*);
+  bool Insertion(int posit,const Noeud*);
+
+
+  /*EchangeN1N2
+provoque l'échange de Noeud1_ et Noeud2_ à la position posit si c'est possible.(Un grand nombre de methode agissent sur Noeud1_ et non Noeud2_, concrètement cette methode permet d'établir une équivalence entre Noeud1_ et Noeud2_ dans la façon dont il seront ciblé par les methodes)
+renvoi True si l'échange s'est fait, False sinon*/
+  bool EchangeN1N2(int posit);
 	
 	protected:
 	

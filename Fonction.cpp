@@ -98,7 +98,15 @@ bool Fonction::Insertion(int posit,const Noeud* n){
   AdressFirstNode_->GetNods(Nodes_,&p); // on recré la liste des noeuds
   len_=p;// on recaclcule la taille de la fonction 
   return true;
-
-
+}
+bool Fonction::EchangeN1N2(int posit){
+  if (Nodes_[posit]->Noeud1_== nullptr or Nodes_[posit]->Noeud2_== nullptr){
+    return false;
+  }
+  Noeud * provisoir = Nodes_[posit]->Noeud1_;
+  Nodes_[posit]->Noeud1_ =Nodes_[posit]->Noeud2_;
+  Nodes_[posit]->Noeud2_ =provisoir;
+  return true;
 
 }
+

@@ -159,13 +159,29 @@ F2->Insertion(-1,&N1);
 
 std::cout <<" result: "+ (F2->Affiche()) << std::endl;
 
-std::cout << (N1.Affiche())+" insert after head of "+ (F2->Affiche()) << std::endl;
+std::cout << (E1.Affiche())+" insert after head of "+ (F2->Affiche()) << std::endl;
 
-F2->Insertion(1,&N1);
+F2->Insertion(0,&E1);
 
 std::cout <<" result: "+ (F2->Affiche()) << std::endl;
 
-F3->Deletion(-1);
+std::cout <<"Test EchangeN1N2"<< std::endl;
+
+F2->Deletion(-1);
+
+std::cout << "EchangeN1N2 order of first node in "+ (F2->Affiche()) << std::endl;
+
+F2->EchangeN1N2(0);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+std::cout << "EchangeN1N2 order of ((True Or X0) And X1) in "+ (F2->Affiche()) << std::endl;
+
+F2->EchangeN1N2(1);
+
+std::cout <<" result: "+ (F2->Affiche()) << std::endl;
+
+
 delete F2;
 delete F3;
 delete Esup;
