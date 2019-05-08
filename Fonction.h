@@ -10,8 +10,8 @@
 #include"Et.h"
 #include"Non.h"
 
-int a = 3;
-int b = 2;
+extern int SIZE1;
+extern int SIZE2;
 class Fonction{
 	public:
 	Fonction() = delete;

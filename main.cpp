@@ -9,6 +9,9 @@
 #include"Non.h"
 #include"Fonction.h"
 
+
+int SIZE1 = 3;
+int SIZE2 = 2;
 int main(){
 std::cout << "Bonjour monde" << std::endl;
 
@@ -133,8 +136,6 @@ test[4] = &T5;
 test[5] = &T6;
  
 //Declaration de la matrice de pointeurs input
-int size1 = 3; 
-int size2 = 2;
 bool** input[3][2]; 
 for(int i =0; i <3; ++i){
 	for(int j = 0; j<2; ++j){
@@ -158,7 +159,5 @@ for (int i =0; i<3; i++){
 
 float result_Fitness = F1.CalculeFitness(input, results);
 std::cout << result_Fitness << std::endl; 
-
-
 return 0;
 }

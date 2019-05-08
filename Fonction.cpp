@@ -12,7 +12,6 @@
 using std::cout;
 using std::cin;
 using std::endl;
-
 //Constructor//
 Fonction::Fonction(Noeud* noeud){
 	AdressFirstNode_ = noeud;
@@ -52,6 +51,7 @@ float Fonction::CalculeFitness(bool** input[3][2], bool expect_results[]){
 			++Fitness;
 		}
 	}
+	std::cout << SIZE1 << std::endl;
 	return Fitness;
 }
 
