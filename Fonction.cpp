@@ -207,19 +207,8 @@ void Fonction::Mute(){
   }
 }
 
-// CaluleFitness() method //
+// Fitness() method //
 
-float Fonction::CalculeFitness(bool** input[3][2], bool expect_results[]){
-	float Fitness=0.0;
-	for(int i = 0; i < 3; i++){
-		bool* var=*input[i][0];
-		if ((AdressFirstNode_->Calcule(var))== expect_results[i]) {
-			++Fitness;
-		}
-	}
-	return Fitness;
-
-}
 float Fonction::Fitness(bool** in,int range , bool * out){
   float Fitness=0.0;
   for(size_t i = 0; i < range; i++){
