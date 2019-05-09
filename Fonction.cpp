@@ -167,36 +167,37 @@ void Fonction::Mute(){
     this->EchangeN1N2(posit);
   }else if (type==2){
     int operateur = int((rand()/(double) RAND_MAX) *3);
-    Valeur Nt(true);
-    Valeur Nf(false);
+    Variable V1(rand()%Nombre_Var_);
+    Variable V2(rand()%Nombre_Var_);
     if (operateur==0){
-      Ou O=Ou(&Nt,&Nf);
+      Ou O=Ou(&V1,&V2);
       this->Insertion(posit,&O);
     }else if (operateur==1){
-      Et E=Et(&Nt,&Nf);
+      Et E=Et(&V1,&V2);
       this->Insertion(posit,&E);
     }else if (operateur==2){
-      Non N=Non(&Nt);
+      Non N=Non(&V1);
       this->Insertion(posit,&N);
     }
   }else if (type==3){
   int ntype1 = int((rand()/(double) RAND_MAX) *2);
   int ntype2 = int((rand()/(double) RAND_MAX) *3);// obligé d'utiliser deux générateur car sinon la distribution est trop peu uniforme. Un des doublet va corespondre à une absence de mutation
-  
-    Valeur Nt(true);
-    Valeur Nf(false);
+    Variable V1(rand()%Nombre_Var_);
+    Variable V2(rand()%Nombre_Var_);
     if (ntype1==0 and ntype2==0){
-      Ou O=Ou(&Nt,&Nf);
+      Ou O=Ou(&V1,&V2);
       this->Remplace(posit,&O);
     }else if (ntype1==1 and ntype2==0){
-      Et E=Et(&Nt,&Nf);
+      Et E=Et(&V1,&V2);
       this->Remplace(posit,&E);
-    }else if (ntype2==2 and ntype1==0){
-      Non N=Non(&Nt);
-      this->Remplace(posit,&N);
-    }else if (ntype2==1 and ntype1==1){
-      (rand()%2==0)?this->Remplace(posit,&Nt):this->Remplace(posit,&Nf);
     }else if (ntype2==1 and ntype1==0){
+      Non N=Non(&V1);
+      this->Remplace(posit,&N);
+    }else if (ntype2==2 and ntype1==1){
+      Valeur Nf(false);
+      Valeur Nt(true);
+      (rand()%2==0)?this->Remplace(posit,&Nt):this->Remplace(posit,&Nf);
+    }else if (ntype2==1 and ntype1==1){
       Variable V(rand()%Nombre_Var_);
       this->Remplace(posit,&V);
       

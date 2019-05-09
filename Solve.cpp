@@ -36,7 +36,7 @@ Solve::Solve(int dim , int nbfille,bool** X,int rangeX, bool *Y, int generations
 
   //il faut initialiser les cases de popFonct_
   for (int i=1; i<lambda_; i++){
-    popFonct_[i]=NULL;
+    popFonct_[i]=nullptr;
   }
 
   //HistoricFitness_[0]=new int(popFonct_[0].fitness());
@@ -47,7 +47,7 @@ Solve::~Solve(){
   for(int i=0; i<lambda_; i++){ //delete chaque pointeur de tableau
     //vérifie que  le pointeur n'est pas nulle , c'est à dire , si il y a une valeur on le supprime
     //faire ça a chaque fois qu'on supprimer les éléments de popFunction
-    if (popFonct_[i]){
+    if (popFonct_[i]!= nullptr){
       delete popFonct_[i];
     }
   } 
@@ -83,7 +83,7 @@ void Solve::PlacementFct(int place ){//Met la meilleure fonction en premier rang
   Fonction* f1 = bestFct(popFonct_,place);
   
   for(int i=0;i<lambda_;++i){
-    if (popFonct_[i]){
+    if (popFonct_[i]!=nullptr){
       delete popFonct_[i];
     }
   }
@@ -92,19 +92,33 @@ void Solve::PlacementFct(int place ){//Met la meilleure fonction en premier rang
 }
 
 
-void Solve::evolve(int nbGeneration,Fonction ** popFonct_,int * HistoricFitness_){
+void Solve::evolve(){
 
-  for(int i=0;i<nbGeneration_;++i){
+  for(int n=0;n<nbGeneration_;++n){
+    int place =0;
+    HistoricFitness_[n] = popFonct_[0]->Fitness(x_,rangex_,y_);
     for(int i=1; i< lambda_;i++){
-  
+      popFonct_[i]=new Fonction(*popFonct_[0]);
+      for (int j=1; j< 5;j++){ //nobre de mutation entre parent et enfant, arbitraire
+        popFonct_[i]->Mute();
+      }
+      int ffit=popFonct_[i]->Fitness(x_,rangex_,y_);
+      std::cout << "Function "<<popFonct_[i]->Affiche()<<ffit<< std::endl;
+      if(ffit>HistoricFitness_[n]){
+        place=i;
+        HistoricFitness_[n]=ffit;
+      }
       //popFonct_[i]=popFonct_[0]->mute();
       //HistoricFitness_[i]=popFonct_[i]->fitness();
     }
-    int place =bestFitness( HistoricFitness_);
-    ReplaceFitness(place);
-    PlacementFct(place);  
     
-  }
+    Fonction* best_func=new Fonction(*popFonct_[place]);
+    for(int i=0;i<lambda_;++i){
+      delete popFonct_[i];
+      popFonct_[i]=nullptr;
+    }
+    popFonct_[0]=best_func;
+  }    
 }
 
 void Solve::affiche_final_fonction()const{

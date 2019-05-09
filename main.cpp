@@ -311,7 +311,9 @@ std::cout <<Fpasbonne.Fitness(Xx,4,Y)<< std::endl;
 
 std::cout <<" test de constructeur solveur"<< std::endl;
 Solve s1(2,5,Xx,4,Y,50);
-
+std::cout <<" test d'évolve"<< std::endl;
+s1.evolve();
+s1.affiche_final_fonction();
 //on ne peut pas appeler le delete sur F2 et Esup car pas de destructeur
 
 delete F2;

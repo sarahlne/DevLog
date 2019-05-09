@@ -43,7 +43,7 @@ class Solve{
     returns nothing
     */
     
-    void evolve(int nbGeneration,Fonction ** popFonct_,int * HistoricFitness_);
+    void evolve();
     /*This fonction make mute the best fonction (which have the best Fitness) of each generation during a nomber of generation given
     argument 
     returns nothing
@@ -58,6 +58,7 @@ class Solve{
   
     //Getters
     void affiche_final_fonction() const;
+    //bool* getHistoricFitness() const;
    
   protected:
     Fonction ** popFonct_ ; // pointeur d'un tableau de pointeurs
