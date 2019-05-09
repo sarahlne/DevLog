@@ -23,15 +23,21 @@ Solve::Solve(){
 }
 */
 Solve::Solve(int dim , int nbfille,bool** X,int rangeX, bool *Y, int generations){
+	std::cout<<"je suis le constructeur"<<std::endl;
   lambda_= nbfille;
   nbvar_= dim;
+  std::cout<<"je suis avant X"<<std::endl;
   x_=X;
+  std::cout<<"je avant Y"<<std::endl;
   y_=Y;
   rangex_=rangeX;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
-
+  std::cout<<lambda_ <<std::endl;
+  std::cout<<sizeof(Fonction*) <<std::endl;
+  std::cout<<"je avant popfunc"<< lambda_*sizeof(Fonction*) <<std::endl;
   popFonct_[0]=new Fonction(new Variable(0),nbvar_);
   nbGeneration_=generations;
+  std::cout<<"je après popfunc"<<std::endl;
   HistoricFitness_=new int[nbGeneration_];
 
   //il faut initialiser les cases de popFonct_
@@ -46,7 +52,7 @@ Solve::Solve(int dim , int nbfille,bool** X,int rangeX, bool *Y, int generations
 Solve::~Solve(){
   for(int i=0; i<lambda_; i++){ //delete chaque pointeur de tableau
     //vérifie que  le pointeur n'est pas nulle , c'est à dire , si il y a une valeur on le supprime
-    //faire ça a chaque fois qu'on supprimer les éléments de popFunction
+    //faire ça à chaque fois qu'on supprimer les éléments de popFunction
     if (popFonct_[i]!= nullptr){
       delete popFonct_[i];
     }
