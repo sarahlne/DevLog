@@ -103,7 +103,6 @@ void Solve::evolve(){
         popFonct_[i]->Mute();
       }
       int ffit=popFonct_[i]->Fitness(x_,rangex_,y_);
-      std::cout << "Function "<<popFonct_[i]->Affiche()<<ffit<< std::endl;
       if(ffit>HistoricFitness_[n]){
         place=i;
         HistoricFitness_[n]=ffit;
@@ -126,4 +125,7 @@ void Solve::affiche_final_fonction()const{
 }
 int* Solve::getHistoricFitness() const{
    return HistoricFitness_;
+}
+int Solve::getFinalFitness() const{
+   return HistoricFitness_[nbGeneration_-1];
 }
