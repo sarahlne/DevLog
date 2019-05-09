@@ -129,3 +129,6 @@ int* Solve::getHistoricFitness() const{
 int Solve::getFinalFitness() const{
    return HistoricFitness_[nbGeneration_-1];
 }
+bool Solve::CalculeFinalFonction(bool*X){
+  return popFonct_[0]->Calcule(X);
+}
