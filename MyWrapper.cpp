@@ -52,11 +52,11 @@ static PyObject* PrintSolve(PyObject* self, PyObject* args){
 // Receive and parse parameters, constructs an object Solve, encapsulate it and return the capsule
 //self : librairie  , args : objet python , les arguments donnés
 static PyObject* SolveTranslator(PyObject* self, PyObject* args){
-	int lambda;
+	PyObject* lambdaO;
 	PyListObject* Xobj;
 	PyListObject* Yobj;
-	int generations;
-	if (!PyArg_ParseTuple(args, "hOOh", &lambda, &Xobj, &Yobj, &generations)){
+	PyObject* generationsO;
+	if (!PyArg_ParseTuple(args, "OOOO", &generationsO, &Xobj, &Yobj,&lambdaO)){
 
 	//parse un tuple
 	//tuple des arguments , args 
@@ -65,8 +65,14 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	//le if teste les arguments rentrées , si il ne sont pas bons --> NULL , ne focntionne pas
 		return NULL;
 	}
+  int lambda=int(PyLong_AsLong(lambdaO));
+  int generations=int(PyLong_AsLong(generationsO));
+  std::cout<<"lambda "<<lambda<<std::endl;
+  std::cout<<"génération "<<generations<<std::endl;
 	int rangeX=PyList_Size((PyObject*)Xobj);
 	int dim=PyList_Size((PyObject*) ((PyObject*) PyList_GetItem( (PyObject*) Xobj, (Py_ssize_t) 0)));
+  std::cout<<"rangeX "<<rangeX<<std::endl;
+  std::cout<<"dim"<<dim<<std::endl;
 	bool ** X=new bool* [rangeX];
 	bool * Y=new bool [rangeX];
 	
@@ -84,6 +90,7 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	//transformer int python en int c++ 
 	std::cout<<"je suis avant le constructeur"<<std::endl;
 	Solve* my_Solve = new Solve(dim,lambda, X,rangeX,Y, generations);
+  my_Solve->evolve();
 	PyObject* capsule = PyCapsule_New(my_Solve, NAME_CAPSULE_SOLVE, SolveCapsuleDestructor);
 	std::cout<<"je suis apres la capsule"<<std::endl;
 	//creer la capsule 

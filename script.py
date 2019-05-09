@@ -4,7 +4,8 @@ print("Hello World")
 monX=[[True,False,True],[True, True, False]]
 monY= [True, False]
 nbgene=6
-S1=bsr.create_solver(5,monX,monY,nbgene)
+nbenfant=5
+S1=bsr.create_solver(53,monX,monY,3)
 print(S1)
 print(bsr.print_fonct(S1))
 

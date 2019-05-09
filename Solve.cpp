@@ -99,7 +99,7 @@ void Solve::PlacementFct(int place ){//Met la meilleure fonction en premier rang
 
 
 void Solve::evolve(){
-
+  std::cout<<"je suis dans evolve"<<std::endl;
   for(int n=0;n<nbGeneration_;++n){
     int place =0;
     HistoricFitness_[n] = popFonct_[0]->Fitness(x_,rangex_,y_);
