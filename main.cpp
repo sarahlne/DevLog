@@ -310,10 +310,13 @@ std::cout <<Fbonne.Fitness(Xx,4,Y)<< std::endl;
 std::cout <<Fpasbonne.Fitness(Xx,4,Y)<< std::endl;
 
 std::cout <<" test de constructeur solveur"<< std::endl;
-Solve s1(2,5,Xx,4,Y,50);
+Solve s1(2,5,Xx,4,Y,10);
 std::cout <<" test d'évolve"<< std::endl;
 s1.evolve();
 s1.affiche_final_fonction();
+for(int i=0;i<10;i++){
+std::cout <<s1.getHistoricFitness()[i]<< std::endl;
+}
 //on ne peut pas appeler le delete sur F2 et Esup car pas de destructeur
 
 delete F2;

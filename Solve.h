@@ -58,7 +58,7 @@ class Solve{
   
     //Getters
     void affiche_final_fonction() const;
-    //bool* getHistoricFitness() const;
+    int* getHistoricFitness() const;
    
   protected:
     Fonction ** popFonct_ ; // pointeur d'un tableau de pointeurs

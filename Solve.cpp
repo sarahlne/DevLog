@@ -30,7 +30,7 @@ Solve::Solve(int dim , int nbfille,bool** X,int rangeX, bool *Y, int generations
   rangex_=rangeX;
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
 
-  popFonct_[0]=new Fonction(new Valeur(true),nbvar_);
+  popFonct_[0]=new Fonction(new Variable(0),nbvar_);
   nbGeneration_=generations;
   HistoricFitness_=new int[nbGeneration_];
 
@@ -123,4 +123,7 @@ void Solve::evolve(){
 
 void Solve::affiche_final_fonction()const{
 	std::cout<<popFonct_[0]->Affiche()<<std::endl;
+}
+int* Solve::getHistoricFitness() const{
+   return HistoricFitness_;
 }
