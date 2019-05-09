@@ -71,9 +71,7 @@ renvoi True si l'insertion s'est faite, False sinon*/
 effectue (si elle est possibles) une transformation de type Remplace, Echange, Insertion ou Deletion sur des noeuds aléatoire de la fonction */
   void Mute();
 	
-	/* CalculeFitness() method */
-	float CalculeFitness(bool** input[3][2], bool expect_results[]);
-
+	/* Fitness() method */
   float Fitness(bool** ,int range, bool *);  
 	
 	protected:

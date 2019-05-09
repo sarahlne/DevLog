@@ -126,49 +126,6 @@ Fonction F1(Ecopy2,2);
 
 std::cout << (F1.Affiche()) << std::endl;
 
-// Test of Calcul method of Fonction //
-
-bool* test[6];
-bool T1 = 0;  
-bool T2 = 0;
-bool T3 = 1;
-bool T4 = 0;
-bool T5 = 0;
-bool T6 = 1;
-
-test[0] = &T1;
-test[1] = &T2;
-test[2] = &T3;
-test[3] = &T4;
-test[4] = &T5; 
-test[5] = &T6;
- 
-//Declaration de la matrice de pointeurs input
-bool** input[3][2]; 
-for(int i =0; i <3; ++i){
-	for(int j = 0; j<2; ++j){
-		input[i][j] = &test[i];
-	}
-}
-
-//Affichage des éléments de la matrice
-for(int i =0; i <3; ++i){
-	for(int j = 0; j<2; ++j){
-		std::cout << **input[i][j] << std::endl;
-	}
-}
-
-//Déclaration de la matrice des "résultats attendus"
-bool results[3];
-for (int i =0; i<3; i++){
-	results[i] = {0};
-}
-
-//Test de CalculFitness
-float result_Fitness = F1.CalculeFitness(input, results);
-std::cout << result_Fitness << std::endl; 
-
-
 //Solve s11;  //genere un seg fault
 //std::cout << "\n affichage du solveur 1 : \n " ;
 //s11.affiche_final_fonction() ;
@@ -244,10 +201,8 @@ F2->EchangeN1N2(1);
 
 std::cout <<" result: "+ (F2->Affiche()) << std::endl;
 
+
 std::cout <<"Test Remplace"<< std::endl;
-
-
-
 
 std::cout << (E1.Affiche())+" remplace  head of : "+ (F2->Affiche()) << std::endl;
 
@@ -273,10 +228,13 @@ F2->Remplace(0,&V1);
 
 std::cout <<" result: "+ (F2->Affiche()) << std::endl;
 
+
 for(int i=0;i<10;i++){
   F2->Mute();
   std::cout <<" Mutate: "+ (F2->Affiche()) << std::endl;
 }
+
+
 std::cout <<" test de fitness"<< std::endl;
 bool X1[2];
 X1[0]=true;

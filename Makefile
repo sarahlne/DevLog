@@ -21,6 +21,6 @@ Et.o: Et.cpp Et.h
 	g++ -o $@ -c $< $(CXXFLAGS)
 
 clean:
-	rm $(objects) 
+	rm $(objects) main
 leak:
 	valgrind --leak-check=full ./main
