@@ -35,17 +35,17 @@ void SolveCapsuleDestructor(PyObject* capsule){
 
 // Calls the Print function of object A
 
-void PrintSolve(PyObject* self, PyObject* args){
+static PyObject* PrintSolve(PyObject* self, PyObject* args){
     Solve*  my_Solve = SolvePythonToC(args);
-    std::cout<<"addresse dans Print"<<&my_Solve<<std::endl;
+    //std::cout<<"je suis dans le print"<<std::endl;
     my_Solve->affiche_final_fonction();
     //renvoie un None de Python
     //Incremente , a chaque fois qu'il est creer , on incremente
     // 2 lignes pas forcement utile
     //renvoie une nouvelle instance de None , donc il faut incrémenter
     // mettre ces lignes si on fait des returns de None
-    //#Py_INCREF(Py_None);
-    //#return Py_None;
+    Py_INCREF(Py_None);
+    return Py_None;
 }
 
 
@@ -53,12 +53,11 @@ void PrintSolve(PyObject* self, PyObject* args){
 //self : librairie  , args : objet python , les arguments donnés
 static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	int lambda;
-	int dim;
-  bool** X;
-  int rangeX;
-  bool Y;
-  int generation;
-	if (!PyArg_ParseTuple(args, "hh", &lambda,&dim,&X,&rangeX,&Y,&generation)){
+	PyListObject* Xobj;
+	PyListObject* Yobj;
+	int generations;
+	if (!PyArg_ParseTuple(args, "hOOh", &lambda, &Xobj, &Yobj, &generations)){
+
 	//parse un tuple
 	//tuple des arguments , args 
 	//"h" : type des éléments de args , EX: si 2 int : "hh"  , si objet pyhton comme liste "O" , (args , "hO" , &a , &obj)
@@ -66,10 +65,27 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	//le if teste les arguments rentrées , si il ne sont pas bons --> NULL , ne focntionne pas
 		return NULL;
 	}
-	Solve* my_Solve = new Solve(lambda,dim,X,rangeX,Y,generation);
-    std::cout<<"addresse my Solve dans Solve Translator"<<&my_Solve<<std::endl;
+	int rangeX=PyList_Size((PyObject*)Xobj);
+	int dim=PyList_Size((PyObject*) ((PyObject*) PyList_GetItem( (PyObject*) Xobj, (Py_ssize_t) 0)));
+	bool ** X=new bool* [rangeX];
+	bool * Y=new bool [rangeX];
+	
+    for (int i = 0; i <rangeX; i++){
+    		bool * x=new bool [dim];
+        PyObject* ligne_de_X = (PyObject*) PyList_GetItem( (PyObject*) Xobj, (Py_ssize_t) i); 
+        for (int j=0 ; j<dim ; j++){
+        	  x[j]=bool(PyLong_AsLong((PyObject*) PyList_GetItem( (PyObject*)ligne_de_X, (Py_ssize_t) j)));
+        }
+        Y[i]= bool(PyLong_AsLong((PyObject*) PyList_GetItem( (PyObject*) Yobj, (Py_ssize_t) i)));
+        X[i]=x;
+    }
+	//initialiser tableau vide
+	//double boucle , remplir les valeurs
+	//transformer int python en int c++ 
+	std::cout<<"je suis avant le constructeur"<<std::endl;
+	Solve* my_Solve = new Solve(dim,lambda, X,rangeX,Y, generations);
 	PyObject* capsule = PyCapsule_New(my_Solve, NAME_CAPSULE_SOLVE, SolveCapsuleDestructor);
-    std::cout<<"addresse capsule dans translator"<<&capsule<<std::endl;
+	std::cout<<"je suis apres la capsule"<<std::endl;
 	//creer la capsule 
 	//Py capsule : du Python .h 
 	//arguments : l'objet- pointeur c++, nom Capsule ( du #define au début) , le destructeur pour vider la capsule
@@ -80,7 +96,7 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 /*static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
     PyListObject* listOfAs;
     int a = 0;
-    if (!PyArg_ParseTuple(args, "O", &listOfAs)){
+    if (!PyArg_ParseTuple(args, "Ohh", &listOfAs)){
         return NULL;
     }
     int size = PyList_Size((PyObject*) listOfAs);
