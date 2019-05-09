@@ -1,7 +1,7 @@
 #include<iostream>
 #include "Fonction.h"
 #include "Noeud.h"
-#include "Valeur.h"
+#include "Variable.h"
 #include <string>
 
 

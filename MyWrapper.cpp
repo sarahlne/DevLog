@@ -54,7 +54,11 @@ void PrintSolve(PyObject* self, PyObject* args){
 static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	int lambda;
 	int dim;
-	if (!PyArg_ParseTuple(args, "hh", &lambda,&dim)){
+  bool** X;
+  int rangeX;
+  bool Y;
+  int generation;
+	if (!PyArg_ParseTuple(args, "hh", &lambda,&dim,&X,&rangeX,&Y,&generation)){
 	//parse un tuple
 	//tuple des arguments , args 
 	//"h" : type des éléments de args , EX: si 2 int : "hh"  , si objet pyhton comme liste "O" , (args , "hO" , &a , &obj)
@@ -62,7 +66,7 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	//le if teste les arguments rentrées , si il ne sont pas bons --> NULL , ne focntionne pas
 		return NULL;
 	}
-	Solve* my_Solve = new Solve(lambda,dim);
+	Solve* my_Solve = new Solve(lambda,dim,X,rangeX,Y,generation);
     std::cout<<"addresse my Solve dans Solve Translator"<<&my_Solve<<std::endl;
 	PyObject* capsule = PyCapsule_New(my_Solve, NAME_CAPSULE_SOLVE, SolveCapsuleDestructor);
     std::cout<<"addresse capsule dans translator"<<&capsule<<std::endl;
