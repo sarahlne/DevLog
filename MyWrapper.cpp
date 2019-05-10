@@ -67,12 +67,12 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	}
   int lambda=int(PyLong_AsLong(lambdaO));
   int generations=int(PyLong_AsLong(generationsO));
-  std::cout<<"lambda "<<lambda<<std::endl;
-  std::cout<<"génération "<<generations<<std::endl;
+  //std::cout<<"lambda "<<lambda<<std::endl;
+  //std::cout<<"génération "<<generations<<std::endl;
 	int rangeX=PyList_Size((PyObject*)Xobj);
 	int dim=PyList_Size((PyObject*) ((PyObject*) PyList_GetItem( (PyObject*) Xobj, (Py_ssize_t) 0)));
-  std::cout<<"rangeX "<<rangeX<<std::endl;
-  std::cout<<"dim"<<dim<<std::endl;
+  //std::cout<<"rangeX "<<rangeX<<std::endl;
+  //std::cout<<"dim"<<dim<<std::endl;
 	bool ** X=new bool* [rangeX];
 	bool * Y=new bool [rangeX];
 	
@@ -88,43 +88,21 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 	//initialiser tableau vide
 	//double boucle , remplir les valeurs
 	//transformer int python en int c++ 
-	std::cout<<"je suis avant le constructeur"<<std::endl;
 	Solve* my_Solve = new Solve(dim,lambda, X,rangeX,Y, generations);
   my_Solve->evolve();
 	PyObject* capsule = PyCapsule_New(my_Solve, NAME_CAPSULE_SOLVE, SolveCapsuleDestructor);
-	std::cout<<"je suis apres la capsule"<<std::endl;
 	//creer la capsule 
 	//Py capsule : du Python .h 
 	//arguments : l'objet- pointeur c++, nom Capsule ( du #define au début) , le destructeur pour vider la capsule
 	return capsule;
 }
 
-
-/*static PyObject* SumAsInPyList(PyObject* self, PyObject* args){
-    PyListObject* listOfAs;
-    int a = 0;
-    if (!PyArg_ParseTuple(args, "Ohh", &listOfAs)){
-        return NULL;
-    }
-    int size = PyList_Size((PyObject*) listOfAs);
-    for (int i = 0; i < size; i++){
-        PyObject* capsule = (PyObject*) PyList_GetItem( (PyObject*) listOfAs, (Py_ssize_t) i);
-        A* my_A = (A*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_A);
-        a += my_A->a;
-    }
-    A* my_A = new A(a);
-  	PyObject* capsule = PyCapsule_New(my_A, NAME_CAPSULE_A, ACapsuleDestructor);
-  	return Py_BuildValue("Oi",capsule,a);
-}
-*/
-
-
 // Module functions {<python function name>, <function in wrapper>, <parameters flag>, <doctring>}
 // https://docs.python.org/3/c-api/structures.html
 static PyMethodDef module_funcs[] = {
 //4 trucs pour chaque methode : le nom de la fontion Python, nom de la methode en c++, type d'arguments ( laisser le METH_varrags , prends des arguments , puis la docstring
 // (PycFunction) pour dire à Pyhton , que c'est une capsule , à voir si c'est utile
-    {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int dim the dimension of vectors that the Fonctions will take \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
+    {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int generation : nombre de générations à faire \n\t  double 3D X : vecteur de variables d'entrées \n\t tableau 2D  Y : vecteur de variable de sortie   \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
     /*{"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},*/
     {"print_fonct", (PyCFunction)PrintSolve, METH_VARARGS,  "Print class Solve instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule \n\n Print the final Function find by the solver"},
 		{NULL, NULL, METH_NOARGS, NULL} // no args : ne prends pas d'arguments

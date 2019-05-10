@@ -11,7 +11,14 @@ class Solve{
   public:
     //Constructeur
     //Solve(); (en veilleuse pour le moment, dangeureux )
-    Solve(int dim , int nbfille,bool** X,int rangeX, bool *Y,int generations);
+    Solve(int dim , int nbfille, bool** X,int rangeX, bool *Y,int generations);
+    /* Constructeur
+     Args : int dim : nombre de varaible de la fonction
+            int nbfille : nombre de Fonction filles construites à chaque génération
+            bool ** X : vecteur de variables d'entrées 
+            bool * Y : vecteur de variable de sortie 
+            int generation : nombre de générations à faire
+            */
     
     //destructeur
     ~Solve();
