@@ -31,7 +31,7 @@ Solve::Solve(int dim , int nbfille,bool** X,int rangeX, bool *Y, int generations
   popFonct_ = (Fonction**) malloc(lambda_*sizeof(Fonction*));
   popFonct_[0]=new Fonction(new Variable(0),nbvar_);
   nbGeneration_=generations;
-  HistoricFitness_=new int[nbGeneration_];
+  HistoricFitness_=new float[nbGeneration_];
 
   //il faut initialiser les cases de popFonct_
   for (int i=1; i<lambda_; i++){
@@ -91,18 +91,20 @@ void Solve::PlacementFct(int place ){//Met la meilleure fonction en premier rang
 
 void Solve::evolve(){
   std::cout<<"je suis dans evolve"<<std::endl;
+  std::cout<<"rangex "<< rangex_ <<std::endl;
   for(int n=0;n<nbGeneration_;++n){
     int place =0;
-    HistoricFitness_[n] = popFonct_[0]->Fitness(x_,rangex_,y_);
+    HistoricFitness_[n] = popFonct_[0]->Fitness(x_,rangex_,y_)/rangex_;
     for(int i=1; i< lambda_;i++){
       popFonct_[i]=new Fonction(*popFonct_[0]);
       for (int j=1; j< 5;j++){ //nobre de mutation entre parent et enfant, arbitraire
         popFonct_[i]->Mute();
       }
-      int ffit=popFonct_[i]->Fitness(x_,rangex_,y_);
+      float ffit=popFonct_[i]->Fitness(x_,rangex_,y_)/rangex_;
       if(ffit>HistoricFitness_[n]){
         place=i;
         HistoricFitness_[n]=ffit;
+      
       }
       //popFonct_[i]=popFonct_[0]->mute();
       //HistoricFitness_[i]=popFonct_[i]->fitness();
@@ -120,10 +122,11 @@ void Solve::evolve(){
 void Solve::affiche_final_fonction()const{
 	std::cout<<popFonct_[0]->Affiche()<<std::endl;
 }
-int* Solve::getHistoricFitness() const{
+float* Solve::getHistoricFitness() const{
+   
    return HistoricFitness_;
 }
-int Solve::getFinalFitness() const{
+float Solve::getFinalFitness() const{
    return HistoricFitness_[nbGeneration_-1];
 }
 bool Solve::CalculeFinalFonction(bool*X){

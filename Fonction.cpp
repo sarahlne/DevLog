@@ -198,7 +198,7 @@ void Fonction::Mute(){
       Valeur Nt(true);
       (rand()%2==0)?this->Remplace(posit,&Nt):this->Remplace(posit,&Nf);
     }else if (ntype2==1 and ntype1==1){
-      Variable V(rand()%Nombre_Var_);
+      Variable V(int((rand()/(double) RAND_MAX) *Nombre_Var_));
       this->Remplace(posit,&V);
       
     }

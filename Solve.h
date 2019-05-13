@@ -65,12 +65,12 @@ class Solve{
   
     //Getters
     void affiche_final_fonction() const;
-    int* getHistoricFitness() const;
-    int getFinalFitness() const;
+    float* getHistoricFitness() const;
+    float getFinalFitness() const;
     
   protected:
     Fonction ** popFonct_ ; // pointeur d'un tableau de pointeurs
-    int * HistoricFitness_ ;
+    float * HistoricFitness_ ;
     int nbGeneration_;
     bool ** x_  ;
     bool * y_  ;
