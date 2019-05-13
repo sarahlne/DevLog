@@ -72,6 +72,30 @@ static PyObject* CalculFonction(PyObject* self, PyObject* args){
     bool resultat=my_Solve->CalculeFinalFonction(Y);
   	return Py_BuildValue("i",resultat);
 }
+//Get Final Fitness of Object Solve
+static PyObject* GetHistoric(PyObject* self, PyObject* args){
+	PyListObject* list;
+	PyObject* argsobj;
+	// The function receives a python list as parameter
+	if (!PyArg_ParseTuple(args, "OO",&argsobj,&list)){
+		    return NULL;
+	}
+	//get the wanted object
+	Solve*  my_Solve = (Solve*) PyCapsule_GetPointer(argsobj,NAME_CAPSULE_SOLVE);
+	//get the historic of fitness of this object
+	float* historic = my_Solve->getHistoricFitness();
+	// get the size of the list
+	int size = PyList_Size((PyObject*) list);
+  for (int j = 0; j < size; j++){
+    // get the j-th element of the python list and convert it to long
+		float listItem = (float) PyLong_AsLong(PyList_GetItem( (PyObject*) list , (Py_ssize_t) j));// check PyFloat_AsDouble for doubles
+		listItem=historic[j];
+		// Set the python list element to the new value
+		PyList_SetItem((PyObject *) list, (Py_ssize_t) j, PyLong_FromLong((double) listItem) ); // check PyFloat_FromDouble for floats
+    
+  }
+	return Py_BuildValue("O",list);
+}
 
 // Receive and parse parameters, constructs an object Solve, encapsulate it and return the capsule
 //self : librairie  , args : objet python , les arguments donnés
@@ -112,6 +136,7 @@ static PyMethodDef module_funcs[] = {
     {"evolve", (PyCFunction)EvolveSolve, METH_VARARGS,  "Evolve the function of the solver through symbolic regression\n\n Args:\n\t Solver Object so be evolved  \n\n Returns : None"},
     {"get_fitness", (PyCFunction)GetFitness, METH_VARARGS,  "Returns the fitness of the Function given by the symbolic regression  \n\n Returns : int "},
     {"calcul", (PyCFunction)CalculFonction, METH_VARARGS,  "Calculate the result of a given input through the fonction found by the symbolic regression \n\n Args:\n\t Solver Object \n\t vector of input to test in the fonction\n\n Returns : int 0 if results is False 1 if True "},
+    {"get_historic", (PyCFunction)GetHistoric, METH_VARARGS,  "Get Historic of fitness from the regression \n\n Args:\n\t Solver Object \n\t list of length equals to number og generation given to the Solver\n\n Returns : table of int"},
 };
 
 static struct PyModuleDef moduledef = {
