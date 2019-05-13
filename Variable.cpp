@@ -3,7 +3,8 @@
 #include"Variable.h"
 
 /* Constructor */
-Variable::Variable(unsigned u):posit_(u){
+Variable::Variable(int u){
+posit_=u;
 }
 
 /*Calcule() method */

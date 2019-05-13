@@ -6,7 +6,7 @@ class Variable : public Noeud{
 
 public:
 /* Constructor */
-Variable(unsigned); 
+Variable(int); 
 
 /*Calcule() method */
 bool Calcule(bool*) const override;
@@ -47,6 +47,6 @@ Recursive function: return the adresses of all nodes of a give array
 
 //Atributs
 protected:
-bool posit_;
+int posit_;
 };
 #endif //VARIABLE_

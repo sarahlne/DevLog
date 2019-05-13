@@ -236,52 +236,65 @@ for(int i=0;i<10;i++){
 
 
 std::cout <<" test de fitness"<< std::endl;
-bool X1[2];
+bool X1[3];
 X1[0]=true;
 X1[1]=false;
-bool X2[2];
+X1[2]=false;
+bool X2[3];
 X2[0]=true;
 X2[1]=true;
-bool X3[2];
+X2[2]=true;
+bool X3[3];
 X3[0]=false;
 X3[1]=false;
-bool X4[2];
+X3[2]=true;
+bool X4[3];
 X4[0]=false;
 X4[1]=true;
+X4[2]=false;
+
+bool X5[3];
+X5[0]=false;
+X5[1]=false;
+X5[2]=false;
+
+bool X6[3];
+X6[0]=true;
+X6[1]=false;
+X6[2]=true;
+
 
 bool* Xx[4];
 Xx[0]=X1;
 Xx[1]=X2;
 Xx[2]=X3;
 Xx[3]=X4;
+Xx[4]=X5;
+Xx[5]=X6;
 
-bool Y[4];
 
-Y[0]=true;
+bool Y[6];
+
+Y[0]=false;
 Y[1]=false;
-Y[2]=true;
-Y[3]=true;
-Fonction Fbonne(new Non(E3.Copy()),2);
-Fonction Fpasbonne(E3.Copy(),2);
+Y[2]=false;
+Y[3]=false;
+Y[4]=true;
+Y[5]=false;
 
-std::cout <<Fbonne.Fitness(Xx,4,Y)<< std::endl;
-std::cout <<Fpasbonne.Fitness(Xx,4,Y)<< std::endl;
 
 std::cout <<" test de constructeur solveur"<< std::endl;
-Solve s1(2,3,Xx,4,Y,10);
+Solve s1(3,50,Xx,6,Y,5);
 std::cout <<" test d'évolve"<< std::endl;
 s1.evolve();
 s1.affiche_final_fonction();
 std::cout <<" test de getHistoricFitness() "<< std::endl;
-for(int i=0;i<10;i++){
+for(int i=0;i<5;i++){
 std::cout <<s1.getHistoricFitness()[i]<< std::endl;
 
 }
 std::cout <<" test de getFinalFitness()"<< std::endl;
 std::cout <<s1.getFinalFitness()<< std::endl;
-
-std::cout <<" test de CalculeFinal Function avec X0 true et X1 false pour:"<< std::endl;
-s1.affiche_final_fonction();
 //std::cout <<s1.CalculeFinalFonction(X)<< std::endl;
 //on ne peut pas appeler le delete sur F2 et Esup car pas de destructeur
 

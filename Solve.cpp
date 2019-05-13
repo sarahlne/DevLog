@@ -95,7 +95,7 @@ void Solve::evolve(){
     HistoricFitness_[n] = popFonct_[0]->Fitness(x_,rangex_,y_)/rangex_;
     for(int i=1; i< lambda_;i++){
       popFonct_[i]=new Fonction(*popFonct_[0]);
-      for (int j=1; j< 20;j++){ //nobre de mutation entre parent et enfant, arbitraire
+      for (int j=1; j< 10;j++){ //nobre de mutation entre parent et enfant, arbitraire
         popFonct_[i]->Mute();
       }
       float ffit=popFonct_[i]->Fitness(x_,rangex_,y_)/rangex_;
