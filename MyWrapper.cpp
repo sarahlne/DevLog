@@ -8,6 +8,8 @@
 #include<iostream>
 #include "def_PyC.h"
 #include "Solve.h"
+#include <ctime>
+
 
 // Name for the cpp object "capsules"
 #define NAME_CAPSULE_SOLVE "SOLVE"
@@ -23,59 +25,71 @@ static Solve* SolvePythonToC(PyObject* args){
 	my_Solve = (Solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_SOLVE);
 	return my_Solve;
 }
-//si on a un autre objet faire une autre methode objetPython to C , un autre destructuer, une autre fonction Print ...
 
 // Frees object A Python capsule
 void SolveCapsuleDestructor(PyObject* capsule){
 	Solve* my_solve = (Solve*) PyCapsule_GetPointer(capsule,NAME_CAPSULE_SOLVE);
-
   delete my_solve;
 }
 
-
 // Calls the Print function of object A
-
 static PyObject* PrintSolve(PyObject* self, PyObject* args){
     Solve*  my_Solve = SolvePythonToC(args);
-    //std::cout<<"je suis dans le print"<<std::endl;
     my_Solve->affiche_final_fonction();
-    //renvoie un None de Python
-    //Incremente , a chaque fois qu'il est creer , on incremente
-    // 2 lignes pas forcement utile
-    //renvoie une nouvelle instance de None , donc il faut incrémenter
-    // mettre ces lignes si on fait des returns de None
+    //incremente une nouvelle instance de Pynone et le renvoie 
+    //en Python, les méthodes renvoie un None si on ne renvoie rien 
     Py_INCREF(Py_None);
     return Py_None;
 }
+//Calls method evolve of object Solve
+static PyObject* EvolveSolve(PyObject* self, PyObject* args){
+		Solve*  my_Solve = SolvePythonToC(args);
+    my_Solve->evolve();
+		Py_INCREF(Py_None);
+    return Py_None;
+}
+//Get Final Fitness of Object Solve
+static PyObject* GetFitness(PyObject* self, PyObject* args){
+		Solve*  my_Solve = SolvePythonToC(args);
+    int fitness=my_Solve->getFinalFitness();
+  	return Py_BuildValue("i",fitness);
+}
 
+//Calcul Final Fonction of Object Solve
+static PyObject* CalculFonction(PyObject* self, PyObject* args){
+		PyObject* argsobj;
+	  PyListObject* Yobj;
+		if (!PyArg_ParseTuple(args, "OO",&argsobj,&Yobj)){
+		    return NULL;
+	  }
+	  int rangeY=PyList_Size((PyObject*)Yobj);
+	  bool * Y=new bool [rangeY];
+	  for (int i = 0; i <rangeY; i++){
+        Y[i]= bool(PyLong_AsLong((PyObject*) PyList_GetItem( (PyObject*) Yobj, (Py_ssize_t) i)));
+    }
+    //argsobj n'est plus un tuple , on ne peut pas utiliser PythontoC
+    Solve*  my_Solve = (Solve*) PyCapsule_GetPointer(argsobj,NAME_CAPSULE_SOLVE);
+    bool resultat=my_Solve->CalculeFinalFonction(Y);
+  	return Py_BuildValue("i",resultat);
+}
 
 // Receive and parse parameters, constructs an object Solve, encapsulate it and return the capsule
 //self : librairie  , args : objet python , les arguments donnés
 static PyObject* SolveTranslator(PyObject* self, PyObject* args){
+	srand(time(NULL)); // for better random generator (for mutation of Fonction)
 	PyObject* lambdaO;
 	PyListObject* Xobj;
 	PyListObject* Yobj;
 	PyObject* generationsO;
 	if (!PyArg_ParseTuple(args, "OOOO", &generationsO, &Xobj, &Yobj,&lambdaO)){
-
-	//parse un tuple
-	//tuple des arguments , args 
-	//"h" : type des éléments de args , EX: si 2 int : "hh"  , si objet pyhton comme liste "O" , (args , "hO" , &a , &obj)
-	//&a l'element en c++ ou on va mettre le contenu (les args)
-	//le if teste les arguments rentrées , si il ne sont pas bons --> NULL , ne focntionne pas
 		return NULL;
 	}
   int lambda=int(PyLong_AsLong(lambdaO));
   int generations=int(PyLong_AsLong(generationsO));
-  //std::cout<<"lambda "<<lambda<<std::endl;
-  //std::cout<<"génération "<<generations<<std::endl;
 	int rangeX=PyList_Size((PyObject*)Xobj);
 	int dim=PyList_Size((PyObject*) ((PyObject*) PyList_GetItem( (PyObject*) Xobj, (Py_ssize_t) 0)));
-  //std::cout<<"rangeX "<<rangeX<<std::endl;
-  //std::cout<<"dim"<<dim<<std::endl;
 	bool ** X=new bool* [rangeX];
 	bool * Y=new bool [rangeX];
-	
     for (int i = 0; i <rangeX; i++){
     		bool * x=new bool [dim];
         PyObject* ligne_de_X = (PyObject*) PyList_GetItem( (PyObject*) Xobj, (Py_ssize_t) i); 
@@ -85,27 +99,19 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
         Y[i]= bool(PyLong_AsLong((PyObject*) PyList_GetItem( (PyObject*) Yobj, (Py_ssize_t) i)));
         X[i]=x;
     }
-	//initialiser tableau vide
-	//double boucle , remplir les valeurs
-	//transformer int python en int c++ 
 	Solve* my_Solve = new Solve(dim,lambda, X,rangeX,Y, generations);
-  my_Solve->evolve();
 	PyObject* capsule = PyCapsule_New(my_Solve, NAME_CAPSULE_SOLVE, SolveCapsuleDestructor);
-	//creer la capsule 
-	//Py capsule : du Python .h 
-	//arguments : l'objet- pointeur c++, nom Capsule ( du #define au début) , le destructeur pour vider la capsule
 	return capsule;
 }
 
 // Module functions {<python function name>, <function in wrapper>, <parameters flag>, <doctring>}
 // https://docs.python.org/3/c-api/structures.html
 static PyMethodDef module_funcs[] = {
-//4 trucs pour chaque methode : le nom de la fontion Python, nom de la methode en c++, type d'arguments ( laisser le METH_varrags , prends des arguments , puis la docstring
-// (PycFunction) pour dire à Pyhton , que c'est une capsule , à voir si c'est utile
-    {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int generation : nombre de générations à faire \n\t  double 3D X : vecteur de variables d'entrées \n\t tableau 2D  Y : vecteur de variable de sortie   \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
-    /*{"sum_list_As", (PyCFunction)SumAsInPyList, METH_VARARGS, "Sum the As in a list\n\nArgs:\n\tlist_As (list): list of capsules A\n\nReturns:\n\t Capsules: Object A capsule\n\t int: sum of A's a"},*/
-    {"print_fonct", (PyCFunction)PrintSolve, METH_VARARGS,  "Print class Solve instance\n\n Args:\n\t capsuleA (Capsule) : object A capsule \n\n Print the final Function find by the solver"},
-		{NULL, NULL, METH_NOARGS, NULL} // no args : ne prends pas d'arguments
+    {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int generation : nombre de générations à faire \n\t tableau 3D X : vecteur de variables d'entrées \n\t tableau 2D  Y : vecteur de variable de sortie   \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
+    {"print_fonct", (PyCFunction)PrintSolve, METH_VARARGS,  "Print class Solve instance\n\n Args:\n\t Solver Object\n\n Print the final Function find by the solver"},
+    {"evolve", (PyCFunction)EvolveSolve, METH_VARARGS,  "Evolve the function of the solver through symbolic regression\n\n Args:\n\t Solver Object so be evolved  \n\n Returns : None"},
+    {"get_fitness", (PyCFunction)GetFitness, METH_VARARGS,  "Returns the fitness of the Function given by the symbolic regression  \n\n Returns : int "},
+    {"calcul", (PyCFunction)CalculFonction, METH_VARARGS,  "Calculate the result of a given input through the fonction found by the symbolic regression \n\n Args:\n\t Solver Object \n\t vector of input to test in the fonction\n\n Returns : int 0 if results is False 1 if True "},
 };
 
 static struct PyModuleDef moduledef = {

@@ -282,7 +282,7 @@ std::cout <<s1.getFinalFitness()<< std::endl;
 
 std::cout <<" test de CalculeFinal Function avec X0 true et X1 false pour:"<< std::endl;
 s1.affiche_final_fonction();
-std::cout <<s1.CalculeFinalFonction(X)<< std::endl;
+//std::cout <<s1.CalculeFinalFonction(X)<< std::endl;
 //on ne peut pas appeler le delete sur F2 et Esup car pas de destructeur
 
 delete F2;
