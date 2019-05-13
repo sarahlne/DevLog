@@ -84,6 +84,8 @@ bool Fonction::Deletion(int posit){
    return false;
   }
 }
+
+//Insertion(int posit, const Noeud* n) method//
 bool Fonction::Insertion(int posit,const Noeud* n){
   if(n->Noeud1_==nullptr){
     return false; //on ne peut pas insérer de valeur ou de variable (cela suprimerait le reste de la branche) 
@@ -110,6 +112,9 @@ bool Fonction::Insertion(int posit,const Noeud* n){
   len_=p;// on recaclcule la taille de la fonction 
   return true;
 }
+
+
+//EchangeN1N2(int posit) method//
 bool Fonction::EchangeN1N2(int posit){
   if (posit==-1 or Nodes_[posit]->Noeud1_== nullptr or Nodes_[posit]->Noeud2_== nullptr ){
     return false;
@@ -120,7 +125,7 @@ bool Fonction::EchangeN1N2(int posit){
   return true;
 
 }
-
+// Remplace(int posit,const Noeud*) method //
 bool Fonction::Remplace(int posit,const Noeud* n){
   if(posit==-1){
     Noeud* InsN= n->Copy();
@@ -158,6 +163,8 @@ bool Fonction::Remplace(int posit,const Noeud* n){
   return true;
 }
 
+
+// Mute()method //
 void Fonction::Mute(){
     int posit = int((rand()/(double) RAND_MAX) *(len_+1))-1;
     int type = int((rand()/(double) RAND_MAX) *4);
@@ -198,7 +205,7 @@ void Fonction::Mute(){
       Valeur Nt(true);
       (rand()%2==0)?this->Remplace(posit,&Nt):this->Remplace(posit,&Nf);
     }else if (ntype2==1 and ntype1==1){
-      Variable V(rand()%Nombre_Var_);
+      Variable V(int((rand()/(double) RAND_MAX) *Nombre_Var_));
       this->Remplace(posit,&V);
       
     }
@@ -208,7 +215,6 @@ void Fonction::Mute(){
 }
 
 // Fitness() method //
-
 float Fonction::Fitness(bool** in,int range , bool * out){
   float Fitness=0.0;
   for(size_t i = 0; i < range; i++){

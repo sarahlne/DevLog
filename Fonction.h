@@ -32,48 +32,78 @@ class Fonction{
 	/* Destructor */
 	~Fonction();
 	
-	/* toString() function */
-	void toString();
-	
 	/* AdressFirstNode getter */
 	Noeud* get_Adress();
+	/* Renvoie l'adresse du premier noeud pointé par la fonction
+	@param None
+	@return un pointeur vers un booléen
+	*/
 	
 	/* Calcul() method */
 	bool Calcule(bool* input);
+	/*Fonction récursive, faisant appel à la méthode Calcul() des booléens passer en paramètre par référence
+	@param un pointeur vers une adresse contenant un booléen
+	@return un booléen
+	*/
 	
 	/* Affiche() method() */
 	std::string Affiche();
+	/* Méthode récursive faisant appel à la méthode Calcul() d'un booléen passer en paramètre par référence
+	@param None
+	@return un string contenant les informations de la fonction
+	*/
+	
 
-  /*Deleltion methode
-provoque une deletion du noeud suivant le noeud à la position posit, si c'est possible.
-renvoi True si la deletion s'est faite, False sinon*/
- 
+  /*Deletion methode*/
   bool Deletion(int posit);
+  /*provoque une deletion du noeud suivant le noeud à la position posit, si c'est possible.
+	renvoi True si la deletion s'est faite, False sinon
+	@param un entier
+	@return une valeur booléenne
+	*/
 
-  /*Insertion methode
-provoque une insertion d'un noeud (copie) après le noeud à la position posit(si -1 ainsertion en tête) si c'est possible.
-renvoi True si l'insertion s'est faite, False sinon*/
- 
+
+  /*Insertion methode*/
   bool Insertion(int posit,const Noeud*);
+	/*
+	provoque une insertion d'un noeud (copie) après le noeud à la position posit(si -1 ainsertion en tête) si c'est possible.
+	renvoi True si l'insertion s'est faite, False sinon
+	@param une entier, l'adresse d'un noeud passer par référence
+	*/
 
-
-  /*EchangeN1N2(posit)
-provoque l'échange de Noeud1_ et Noeud2_ à la position posit si c'est possible.(Un grand nombre de methode agissent sur Noeud1_ et non Noeud2_, concrètement cette methode permet d'établir une équivalence entre Noeud1_ et Noeud2_ dans la façon dont il seront ciblé par les methodes)
-renvoi True si l'échange s'est fait, False sinon*/
+  /*EchangeN1N2(posit)*/
   bool EchangeN1N2(int posit);
+  /*provoque l'échange de Noeud1_ et Noeud2_ à la position posit si c'est possible.(Un grand nombre de methode agissent
+   sur Noeud1_ et non Noeud2_, concrètement cette methode permet d'établir une équivalence 	entre Noeud1_ et Noeud2_ 
+   dans la façon dont il seront ciblé par les methodes)
+	 renvoi True si l'échange s'est fait, False sinon
+	 @param un entier
+	 return une booléen
+	 */
 
-  /*Remplace(int posit,const Noeud*)
-remplace le noeud par le noeud en parametre(copie) après le noeud à la position posit(si -1 ainsertion en tête) si c'est possible.
-renvoi True si l'insertion s'est faite, False sinon*/
+  /*Remplace(int posit,const Noeud*)*/
   bool Remplace(int posit,const Noeud*);
+	/*remplace le noeud par le noeud en parametre(copie) après le noeud à la position posit(si -1 ainsertion en tête) si c'est possible.
+	renvoi True si l'insertion s'est faite, False sinon
+	@param un entier, l'adresse d'un Noeud passer par référence
+	@return un booléen
+	*/
 
-  /*Mute(int MutNumber)
-effectue (si elle est possibles) une transformation de type Remplace, Echange, Insertion ou Deletion sur des noeuds aléatoire de la fonction */
+
+  /*Mute(int MutNumber)*/
   void Mute();
+	/*effectue (si elle est possibles) une transformation de type Remplace, Echange, Insertion ou Deletion sur des noeuds aléatoire de la fonction
+	@param None
+	@return None
+	*/
+	
 	
 	/* Fitness() method */
   float Fitness(bool** ,int range, bool *);  
-	
+	/* Calule la Fitness de la fonction en comparant un tableau de résultats obtenu par la fonction à un tableau résultats attendu donné en paramêtre
+	@param Un pointer référent vers un pointer de booléean, un entier, un pointer vers un booléen
+	@return un Float représentant la valeur de la Fitness
+	*/
 	protected:
 	
 	private:
