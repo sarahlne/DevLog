@@ -83,12 +83,12 @@ static PyObject* GetHistoric(PyObject* self, PyObject* args){
 	//get the wanted object
 	Solve*  my_Solve = (Solve*) PyCapsule_GetPointer(argsobj,NAME_CAPSULE_SOLVE);
 	//get the historic of fitness of this object
-	int* historic = my_Solve->getHistoricFitness();
+	float* historic = my_Solve->getHistoricFitness();
 	// get the size of the list
 	int size = PyList_Size((PyObject*) list);
   for (int j = 0; j < size; j++){
     // get the j-th element of the python list and convert it to long
-		int listItem = (int) PyLong_AsLong(PyList_GetItem( (PyObject*) list , (Py_ssize_t) j));// check PyFloat_AsDouble for doubles
+		float listItem = (float) PyLong_AsLong(PyList_GetItem( (PyObject*) list , (Py_ssize_t) j));// check PyFloat_AsDouble for doubles
 		listItem=historic[j];
 		// Set the python list element to the new value
 		PyList_SetItem((PyObject *) list, (Py_ssize_t) j, PyLong_FromLong((double) listItem) ); // check PyFloat_FromDouble for floats
