@@ -1,10 +1,36 @@
-### DevLog
+### Autors
+This project has been made in collaboration with: @Tpocquillon , @abonnalcon , @Dikec and @sarahlne
 
-#C++ core
-définir ici les classes, obj ...
+### Goals
+The goal of this project was to create a python library coded in C++ language. The library give access to a solver wich allowed the user to do a symbolic regression from boolean values and operators AND, OR and NOT. Since the solver we can access to the following methods:
+
+	- A method that returns an optimal function by symbolic regression, for a given input/output set
+	- A method that display the function in a tree form
+	- A method able to get the fitness og the last function
+	- A method able to give results given a dataset
+	- A method able to give the evolution of the fitness during time
+This projet tends to be finish be it can still be improved
+
+### C++ core
++ `Solver.cpp , Solver.h'`:
+ Use to manipulate the function Class
++ `Function.cpp ,Function.h`:
+Use as a structure to represent the function used by the user and to do some operation to evolve the input function. 
++ `Noeud.cpp , Noeud.h`:
+Hiden class , use to combine Value, Variable, And, Or, and Not classes in a same intance of classe. 
++ `Valeur.cpp , Valeur.h`:
+Contains the value of a node, determine from given variables and one of the operators AND, OR, or NOT.
++ `Variable.cpp , Variable.h`:
+Contains the variable given to a Node to compute a return value.
++ `And.cpp , And.h`:
+Returns the result of the AND operation between two nodes.
++ `Or.cpp , Or.h`: 
+Returns the result of the OR operation between two nodes.
++ `Not.cpp , Not.h`:
+Returns the result of the NOT operation between two nodes.
 
 
-#for the Wrapper / Pylib
+### Wrapper - Pylib
 
 + `setup.py` contains all the code needed to create the extension module using distutils library.
 + `install.sh` contains the command lines that should be executed to build the extension module .so:
