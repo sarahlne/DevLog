@@ -56,11 +56,6 @@ class Solve{
     returns nothing
     */
     
-    
-    
-    
-    
-    
     bool CalculeFinalFonction(bool*X);
   
     //Getters

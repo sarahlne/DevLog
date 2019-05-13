@@ -90,14 +90,12 @@ void Solve::PlacementFct(int place ){//Met la meilleure fonction en premier rang
 
 
 void Solve::evolve(){
-  std::cout<<"je suis dans evolve"<<std::endl;
-  std::cout<<"rangex "<< rangex_ <<std::endl;
   for(int n=0;n<nbGeneration_;++n){
     int place =0;
     HistoricFitness_[n] = popFonct_[0]->Fitness(x_,rangex_,y_)/rangex_;
     for(int i=1; i< lambda_;i++){
       popFonct_[i]=new Fonction(*popFonct_[0]);
-      for (int j=1; j< 5;j++){ //nobre de mutation entre parent et enfant, arbitraire
+      for (int j=1; j< 20;j++){ //nobre de mutation entre parent et enfant, arbitraire
         popFonct_[i]->Mute();
       }
       float ffit=popFonct_[i]->Fitness(x_,rangex_,y_)/rangex_;
