@@ -8,7 +8,6 @@ nbenfant=5
 S1=bsr.create_solver(53,monX,monY,3)
 print(S1)
 print(bsr.print_fonct(S1))
-help(bsr)
 monY= [True,False]
 gene=100
 lamba=5
