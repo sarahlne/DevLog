@@ -131,7 +131,7 @@ static PyObject* SolveTranslator(PyObject* self, PyObject* args){
 // Module functions {<python function name>, <function in wrapper>, <parameters flag>, <doctring>}
 // https://docs.python.org/3/c-api/structures.html
 static PyMethodDef module_funcs[] = {
-    {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int generation : nombre de générations à faire \n\t tableau 3D X : vecteur de variables d'entrées \n\t tableau 2D  Y : vecteur de variable de sortie   \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
+    {"create_solver", (PyCFunction)SolveTranslator, METH_VARARGS, "Create an instance of class Solve\n\nArgs:\n\t int generation : number of generation \n\t tableau 3D X : vector with input variables \n\t tableau 2D  Y : vector of output variables  \n\t int nbfille numbers of new Fonctions created at each generation \n\nReturns:\n\t capsule: Object Solve capsule"},
     {"print_fonct", (PyCFunction)PrintSolve, METH_VARARGS,  "Print class Solve instance\n\n Args:\n\t Solver Object\n\n Print the final Function find by the solver"},
     {"evolve", (PyCFunction)EvolveSolve, METH_VARARGS,  "Evolve the function of the solver through symbolic regression\n\n Args:\n\t Solver Object so be evolved  \n\n Returns : None"},
     {"get_fitness", (PyCFunction)GetFitness, METH_VARARGS,  "Returns the fitness of the Function given by the symbolic regression  \n\n Returns : int "},
