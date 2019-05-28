@@ -139,7 +139,8 @@ Fonction* F2= new Fonction(F1);
 
 std::cout << (F2->Affiche()) << std::endl;
 
-
+std::cout << "Test Calcul()" << std::endl;
+std::cout << (F2->Calcule(&X[0])) << std::endl;
 
 F2->Deletion(-1);
 
@@ -291,11 +292,13 @@ s1.affiche_final_fonction();
 std::cout <<" test de getHistoricFitness() "<< std::endl;
 for(int i=0;i<5;i++){
 std::cout <<s1.getHistoricFitness()[i]<< std::endl;
-
 }
+
 std::cout <<" test de getFinalFitness()"<< std::endl;
 std::cout <<s1.getFinalFitness()<< std::endl;
-//std::cout <<s1.CalculeFinalFonction(X)<< std::endl;
+
+std::cout << "Test de CalculeFinalFonction(X)" << std::endl;
+std::cout <<s1.CalculeFinalFonction(X)<< std::endl;
 //on ne peut pas appeler le delete sur F2 et Esup car pas de destructeur
 
 delete F2;

@@ -59,19 +59,28 @@ static PyObject* GetFitness(PyObject* self, PyObject* args){
 static PyObject* CalculFonction(PyObject* self, PyObject* args){
 		PyObject* argsobj;
 	  PyListObject* Yobj;
+	  std::cout << "je suis dans Calcule" << std::endl;
 		if (!PyArg_ParseTuple(args, "OO",&argsobj,&Yobj)){
 		    return NULL;
 	  }
-	  int rangeY=PyList_Size((PyObject*)Yobj);
+	  int rangeY= (int)PyList_Size((PyObject*)Yobj);
+	  printf("size  %d\n",rangeY);
 	  bool * Y=new bool [rangeY];
 	  for (int i = 0; i <rangeY; i++){
         Y[i]= bool(PyLong_AsLong((PyObject*) PyList_GetItem( (PyObject*) Yobj, (Py_ssize_t) i)));
+        printf("i %d\n",i);
     }
     //argsobj n'est plus un tuple , on ne peut pas utiliser PythontoC
     Solve*  my_Solve = (Solve*) PyCapsule_GetPointer(argsobj,NAME_CAPSULE_SOLVE);
     bool resultat=my_Solve->CalculeFinalFonction(Y);
+    std::cout << resultat << std:: endl;
   	return Py_BuildValue("i",resultat);
 }
+
+
+
+
+
 //Get Final Fitness of Object Solve
 static PyObject* GetHistoric(PyObject* self, PyObject* args){
 	PyListObject* list;
